@@ -6,7 +6,7 @@ local castSequence = nil
 local castSequenceStartTime = 0
 local castSequenceTarget = 0
 local prioritySpell = nil
-local priorityItem = nil
+local priorityAction = nil
 local priorityMacro = nil
 local castSequenceMessage = nil
 
@@ -40,11 +40,6 @@ function _RunMacroText(macroText)
    end
 end
 
-kps.runMacro = function(macroText)
-    -- Call Macro Text
-    _RunMacroText(macroText)
-end
-
 function _SpellStopCasting()
    secured = false
    while not secured do
@@ -58,6 +53,15 @@ function _SpellStopCasting()
          SpellStopCasting()
       ]])
    end
+end
+
+kps.runMacro = function(macroText)
+    -- Call Macro Text
+    _RunMacroText(macroText)
+end
+
+kps.stopCasting = function()
+    _SpellStopCasting()
 end
 
 function kps.write(...)
@@ -94,8 +98,8 @@ end
 local function handlePriorityActions(spell)
     if priorityMacro ~= nil then
         priorityMacro = nil
-    elseif priorityItem ~= nil then
-        priorityItem = nil
+    elseif priorityAction ~= nil then
+        priorityAction = nil
     elseif prioritySpell ~= nil then
         if prioritySpell.canBeCastAt("target") then
             prioritySpell.cast()
@@ -110,8 +114,6 @@ local function handlePriorityActions(spell)
     end
     return true
 end
-
-
 
 kps.combatStep = function ()
     -- Check for rotation
@@ -179,7 +181,7 @@ hooksecurefunc("UseAction", function(...)
             end
         end
         if stype == "item" then
-            priorityItem = id
+            priorityAction = kps.useItem(id)
         end
         if stype == "macro" then
             -- name, icon, body, isLocal = GetMacroInfo("name" or macroSlot)
@@ -190,7 +192,3 @@ hooksecurefunc("UseAction", function(...)
         end
     end
 end)
-
-kps.stopCasting = function()
-    _SpellStopCasting()
-end
