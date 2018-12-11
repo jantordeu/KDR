@@ -17,7 +17,7 @@ local RingOfFrost  = spells.ringOfFrost.name
 kps.rotations.register("MAGE","FROST",
 {
 
-    --{{"pause"}, 'kps.pauseRotation', 4},
+   {spells.arcaneIntellect, 'not player.hasBuff(spells.arcaneIntellect)' , "player" },
     
     {{"macro"}, 'not target.isAttackable and mouseover.isAttackable and mouseover.inCombat' , "/target mouseover" },
     {{"macro"}, 'not target.exists and mouseover.isAttackable and mouseover.inCombat' , "/target mouseover" },
@@ -31,7 +31,7 @@ kps.rotations.register("MAGE","FROST",
     
     {spells.spellsteal, 'target.isStealable' , "target" },
    -- interrupts
-    {spells.removeCurse, 'kps.mouseOver and mouseover.isFriend and mouseover.isDispellable("Curse")' , "mouseover" },
+    {spells.removeCurse, 'kps.mouseOver and mouseover.isHealable and mouseover.isDispellable("Curse")' , "mouseover" },
     {{"nested"}, 'kps.interrupt',{
         {spells.counterspell, 'target.isInterruptable' , "target" },
         {spells.counterspell, 'focus.isInterruptable' , "focus" },
