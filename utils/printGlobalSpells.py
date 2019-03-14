@@ -95,12 +95,12 @@ spells.group("bloodlust","Bloodlust")
 spells.bloodlust.add_all_spells([2825, 32182, 80353, 90355, 146555])
 
 spells.group("immuneHeal","Immune Heal")
-spells.immuneHeal.add_all_spells([243961])
+spells.immuneHeal.add_all_spells([243961,285213])
 
 spells.group("absorptionHeal","Absorption Heal")
 spells.absorptionHeal.add_all_spells([244093, 235933, 233263, 248396, 245586])
 
-spells.group("ignoreAura","ignore Aura")
-spells.immuneHeal.add_all_spells([642,47585,45438,216890,212295,31224,186265,48707,196555,213602])
+spells.group("immuneDamage","ignore Aura")
+spells.immuneDamage.add_all_spells([642,47585,45438,216890,212295,31224,186265,48707,196555,213602])
 
 print(spells)

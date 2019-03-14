@@ -117,7 +117,7 @@ function kps.env.priest.damageTarget()
     elseif UnitIsAttackable("focus") then return "focus"
     elseif UnitIsAttackable("focustarget") then return "focustarget"
     elseif UnitIsAttackable("mouseovertarget") then return "mouseovertarget"
-    else return "target"
+    else return kps.env.heal.enemyLowest -- kps.env.heal.enemyTarget
     end
 end
 
@@ -131,7 +131,7 @@ function kps.env.priest.countFriend()
 end
 
 local MindFlay = kps.spells.priest.mindFlay.name
-local VoidForm = kps.spells.priest.voidform.name
+local VoidForm = kps.spells.priest.voidForm.name
 local ShadowWordPain = kps.spells.priest.shadowWordPain.name
 local VampiricTouch = kps.spells.priest.vampiricTouch.name
 
@@ -140,17 +140,15 @@ function kps.env.priest.FocusMouseoverShadow()
     local mouseover = kps.env.mouseover
     local focus = kps.env.focus
     if not focus.exists and not UnitIsUnit("target","mouseover") and mouseover.isAttackable and mouseover.inCombat then
-        if not mouseover.hasMyDebuff(kps.spells.priest.shadowWordPain) then
+        if not mouseover.hasMyDebuff(kps.spells.priest.vampiricTouch) then
             kps.runMacro("/focus mouseover")
-        elseif not mouseover.hasMyDebuff(kps.spells.priest.vampiricTouch) then
-            kps.runMacro("/focus mouseover")
-        else
+        elseif not mouseover.hasMyDebuff(kps.spells.priest.shadowWordPain) then
             kps.runMacro("/focus mouseover")
         end
-    elseif focus.exists and not UnitIsUnit("target","mouseover") and not UnitIsUnit("focus","mouseover") and focus.hasMyDebuff(kps.spells.priest.shadowWordPain) and focus.hasMyDebuff(kps.spells.priest.vampiricTouch) then
-        if not mouseover.hasMyDebuff(kps.spells.priest.shadowWordPain) then
+    elseif focus.exists and not UnitIsUnit("target","mouseover") and not UnitIsUnit("focus","mouseover") and focus.myDebuffDuration(kps.spells.priest.shadowWordPain) > 4.8 and focus.myDebuffDuration(kps.spells.priest.vampiricTouch) > 6.3 then
+        if not mouseover.hasMyDebuff(kps.spells.priest.vampiricTouch) and mouseover.isAttackable and mouseover.inCombat then
             kps.runMacro("/focus mouseover")
-        elseif not mouseover.hasMyDebuff(kps.spells.priest.vampiricTouch) then
+        elseif not mouseover.hasMyDebuff(kps.spells.priest.shadowWordPain) and mouseover.isAttackable and mouseover.inCombat then
             kps.runMacro("/focus mouseover")
         end
     end
@@ -173,7 +171,6 @@ end
 local overHealTableUpdate = function()
     -- kps.defensive in case I want to heal with mouseover (e.g. debuff absorb heal)
     local onCD = kps.env.priest.holyWordSerenityOnCD()
-    if kps.defensive then onCD = true end
     local overHealTable = { {kps.spells.priest.flashHeal.name, 0.855 , onCD}, {kps.spells.priest.heal.name, 0.955 , onCD}, {kps.spells.priest.prayerOfHealing.name, 3 , kps.defensive} }
     return  overHealTable
 end

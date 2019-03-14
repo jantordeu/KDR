@@ -247,12 +247,13 @@ kps.spells.priest.voidShield = kps.Spell.fromId(280749)
 kps.spells.priest.voidShift = kps.Spell.fromId(108968)
 kps.spells.priest.voidSiphon = kps.Spell.fromId(215322)
 kps.spells.priest.voidTorrent = kps.Spell.fromId(205065)
-kps.spells.priest.voidform = kps.Spell.fromId(185916)
+kps.spells.priest.voidForm = kps.Spell.fromId(185916)
 kps.spells.priest.wealAndWoe = kps.Spell.fromId(273307)
 kps.spells.priest.whispersOfTheDamned = kps.Spell.fromId(275722)
 kps.spells.priest.willOfTheConclave = kps.Spell.fromId(241148)
 kps.spells.priest.wordOfMending = kps.Spell.fromId(278645)
 kps.spells.priest.wordsOfHealing = kps.Spell.fromId(196430)
+kps.spells.priest.weakenedSoul = kps.Spell.fromId(6788)
 kps.spells.priest.fireBlood = kps.Spell.fromId(265221)
 
 
@@ -262,5 +263,7 @@ kps.spells.priest.answeredPrayers = kps.Spell.fromId(253437)
 kps.spells.priest.everlastingHope = kps.Spell.fromId(253443)
 -- "Puissance du côté obscur"  -- "Power of the Dark Side" -- Your next Penance will deal 50% additional damage or healing.
 kps.spells.priest.powerOfTheDarkSide = kps.Spell.fromId(198069)
-
-
+-- "Thought Harvester" -- Mind Sear damage increased by 150%.
+kps.spells.priest.thoughtHarvester = kps.Spell.fromId(288343)
+-- "Arcane Torrent" -- Blood Elf Racial -- Remove 1 beneficial effect from all enemies within 8 yards and restore 3% of your mana.
+kps.spells.priest.arcaneTorrent = kps.Spell.fromId(232633)

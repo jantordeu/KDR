@@ -15,13 +15,14 @@ end
 @function `<UNIT>.isAttackable` - returns true if the given unit can be attacked by the player.
 ]]--
 function Unit.isAttackable(self)
+    if Unit.isControlled(self) then return false end
     if not Unit.exists(self) then return false end
     if (string.match(GetUnitName(self.unit), kps.locale["Dummy"])) then return true end
     if not UnitCanAttack("player", self.unit) then return false end -- UnitCanAttack(attacker, attacked) return 1 if the attacker can attack the attacked, nil otherwise.
     if UnitIsFriend("player", self.unit) then return false end
     if not Unit.lineOfSight(self) then return false end
+    if Unit.immuneDamage(self) then return false end
     if not kps.env.harmSpell.inRange(self.unit) then return false end
-    if Unit.isPVP == true and Unit.immuneDamage == true then return false end --PVP
     return true
 end
 
@@ -68,6 +69,7 @@ end
 function Unit.isFriend(self)
     if not Unit.exists(self) then return false end
     if Unit.inVehicle(self) then return false end
+    if not Unit.lineOfSight(self) then return false end
     if not UnitCanAssist("player",self.unit) then return false end -- UnitCanAssist(unitToAssist, unitToBeAssisted) return 1 if the unitToAssist can assist the unitToBeAssisted, nil otherwise
     if not UnitIsFriend("player", self.unit) then return false end -- UnitIsFriend("unit","otherunit") return 1 if otherunit is friendly to unit, nil otherwise.
     return true
@@ -81,7 +83,7 @@ function Unit.isHealable(self)
     if not Unit.exists(self) then return false end
     if Unit.inVehicle(self) then return false end
     if not Unit.lineOfSight(self) then return false end
-    --if Unit.immuneHeal(self) then return false end
+    if Unit.immuneHeal(self) then return false end
     if not UnitCanAssist("player",self.unit) then return false end -- UnitCanAssist(unitToAssist, unitToBeAssisted) return 1 if the unitToAssist can assist the unitToBeAssisted, nil otherwise
     if not UnitIsFriend("player", self.unit) then return false end -- UnitIsFriend("unit","otherunit") return 1 if otherunit is friendly to unit, nil otherwise.
     local inRange,_ = UnitInRange(self.unit)
@@ -127,21 +129,21 @@ function Unit.hasAttackableTarget(self)
 end 
 
 --[[[
-@function `<UNIT>.isTankInRaid` - returns true if the given unit is a tank
+@function `<UNIT>.isRaidTank` - returns true if the given unit is a tank
 ]]--
 
-function Unit.isTankInRaid(self)
+function Unit.isRaidTank(self)
     if UnitGroupRolesAssigned(self.unit) == "TANK" then return true end
     if kps["env"].focus.unit == self.unit then return true end
     return false
 end
 
-function Unit.isHealerInRaid(self)
+function Unit.isRaidHealer(self)
     if UnitGroupRolesAssigned(self.unit) == "HEALER" then return true end
     return false
 end
 
-function Unit.isDamagerInRaid(self)
+function Unit.isRaidDamager(self)
     if UnitGroupRolesAssigned(self.unit) == "DAMAGER" then return true end
     return false
 end 

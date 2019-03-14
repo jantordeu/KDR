@@ -56,7 +56,6 @@ function _SpellStopCasting()
 end
 
 kps.runMacro = function(macroText)
-    -- Call Macro Text
     _RunMacroText(macroText)
 end
 
@@ -128,9 +127,7 @@ kps.combatStep = function ()
     local player = kps.env.player
 
     -- No combat if mounted (except if overriden by config), dead or drinking
-    if (player.isMounted and not kps.config.dismountInCombat) or player.isDead or player.isDrinking then
-        return
-    end
+    if (player.isMounted and not kps.config.dismountInCombat) or player.isDead or player.isDrinking then return end
 
     if castSequence ~= nil then
         if castSequence[castSequenceIndex] ~= nil and (castSequenceStartTime + kps.maxCastSequenceLength > GetTime()) then
@@ -150,9 +147,9 @@ kps.combatStep = function ()
         if not activeRotation then return end
         activeRotation.checkTalents()
         local spell, target, message = activeRotation.getSpell()
-        
+
         if player.pause then return end
-            
+ 
         if spell ~= nil and not player.isCasting and not handlePriorityActions(spell) then
             if spell.name == nil then
                 LOG.debug("Starting Cast-Sequence...")

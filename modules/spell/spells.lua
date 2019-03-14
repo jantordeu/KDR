@@ -130,6 +130,7 @@ kps.spells.battlerez.eternalGuardian = kps.Spell.fromId(126393) -- Eternal Guard
 -- Immune Heal
 kps.spells.immuneHeal = {}
 kps.spells.immuneHeal.misery = kps.Spell.fromId(243961) -- Misery
+kps.spells.immuneHeal.caressOfDeath = kps.Spell.fromId(285213) -- Caress of Death
 
 -- Absorption Heal
 kps.spells.absorptionHeal = {}
@@ -142,22 +143,25 @@ kps.spells.absorptionHeal.chilledBlood = kps.Spell.fromId(245586) -- Chilled Blo
 -- Boss Debuff (Uldir)
 kps.spells.bossDebuff = {}
 kps.spells.bossDebuff.deathwish = kps.Spell.fromId(274271) -- Magic
---kps.spells.bossDebuff.pitOfDespair = kps.Spell.fromId(276031) -- Curse
-
-
+kps.spells.bossDebuff.grievousAxe = kps.Spell.fromId(284781) -- Roi Rastakhan Dazar'alor
 
 
 -- ignore Aura Buff
-kps.spells.ignoreAura = {}
-kps.spells.ignoreAura.divineShield = kps.Spell.fromId(642)
-kps.spells.ignoreAura.dispersion = kps.Spell.fromId(47585)
-kps.spells.ignoreAura.iceBlock = kps.Spell.fromId(45438)
-kps.spells.ignoreAura.spellReflection = kps.Spell.fromId(216890)
-kps.spells.ignoreAura.netherWard = kps.Spell.fromId(212295)
-kps.spells.ignoreAura.cloakOfShadows = kps.Spell.fromId(31224)
-kps.spells.ignoreAura.aspectOfTheTurtle = kps.Spell.fromId(186265)
-kps.spells.ignoreAura.antiMagicShell = kps.Spell.fromId(48707)
-kps.spells.ignoreAura.netherwalk = kps.Spell.fromId(196555)
-kps.spells.ignoreAura.greaterFade = kps.Spell.fromId(213602)
+kps.spells.immuneDamage = {}
+kps.spells.immuneDamage.divineShield = kps.Spell.fromId(642)
+kps.spells.immuneDamage.dispersion = kps.Spell.fromId(47585)
+kps.spells.immuneDamage.iceBlock = kps.Spell.fromId(45438)
+kps.spells.immuneDamage.spellReflection = kps.Spell.fromId(216890)
+kps.spells.immuneDamage.netherWard = kps.Spell.fromId(212295)
+kps.spells.immuneDamage.cloakOfShadows = kps.Spell.fromId(31224)
+kps.spells.immuneDamage.aspectOfTheTurtle = kps.Spell.fromId(186265)
+kps.spells.immuneDamage.antiMagicShell = kps.Spell.fromId(48707)
+kps.spells.immuneDamage.netherwalk = kps.Spell.fromId(196555)
+kps.spells.immuneDamage.greaterFade = kps.Spell.fromId(213602)
+
+-- Spells outside gcd or clipping spell cast
+kps.spells.clippingSpell = {}
+kps.spells.clippingSpell.mindFlay = kps.Spell.fromId(15407)
+
 
 

@@ -91,6 +91,7 @@ end
 ]]--
 -- name, text, texture, startTimeMS, endTimeMS, isTradeSkill, castID, notInterruptible, spellId = UnitCastingInfo("unit")
 -- name, text, texture, startTimeMS, endTimeMS, isTradeSkill, notInterruptible = UnitChannelInfo("unit")
+
 local castTimeLeft = setmetatable({}, {
     __index = function(t, self)
         local val = function(unit)
@@ -100,8 +101,9 @@ local castTimeLeft = setmetatable({}, {
                 local name,_,_,_,endTime,_,_ = UnitChannelInfo(unit)
                 if endTime == nil then return 0 end
                 if tostring(self.name) == tostring(name) then return ((endTime - (GetTime() * 1000 ) )/1000) end
+            else
+            	if tostring(self.name) == tostring(name) then return ((endTime - (GetTime() * 1000 ) )/1000) end
             end
-            if tostring(self.name) == tostring(name) then return ((endTime - (GetTime() * 1000 ) )/1000) end
             return 0
         end
         t[self] = val
@@ -205,7 +207,6 @@ local shouldInterrupt = setmetatable({}, {
         local spellCasting, _, _, _, endTime, _, _, _, _ = UnitCastingInfo("player")
         if spellCasting == nil then return false end
         if endTime == nil then return false end
-        if kps.defensive then return false end
         local target = kps.lastTarget
         local targetHealth = UnitHealth(kps.lastTarget) / UnitHealthMax(kps.lastTarget)
 
@@ -214,10 +215,10 @@ local shouldInterrupt = setmetatable({}, {
                 DEFAULT_CHAT_FRAME:AddMessage("STOPCASTING prayerOfHealing ".." countLossInRange: "..breakpoint, 0, 0.5, 0.8)
                 return true
             elseif self.name == kps.spells.priest.flashHeal.name and targetHealth > breakpoint then
-                DEFAULT_CHAT_FRAME:AddMessage("STOPCASTING flashHeal "..target.." health: "..targetHealth, 0, 0.5, 0.8)
+                DEFAULT_CHAT_FRAME:AddMessage("STOPCASTING flashHeal ".. target .." health: "..targetHealth, 0, 0.5, 0.8)
                 return true
             elseif self.name == kps.spells.priest.heal.name and targetHealth > breakpoint then
-                DEFAULT_CHAT_FRAME:AddMessage("STOPCASTING heal ".."|"..target.." health: "..targetHealth, 0, 0.5, 0.8)
+                DEFAULT_CHAT_FRAME:AddMessage("STOPCASTING heal ".."|".. target .." health: "..targetHealth, 0, 0.5, 0.8)
                 return true
             end
         end
