@@ -18,22 +18,29 @@ kps.Spell.metatable = {}
 
 local GetUnitName = GetUnitName
 
+function _CastGroundSpellByName(spell, target)
+  local target = target or "target"
+  secured = false
+  while not secured do
+    RunScript([[
+      for index = 1, 500 do
+        if not issecure() then
+          return
+        end
+      end
+      RunMacroText("/cast [@cursor] ]] .. spell .. [[")
+      secured = true
+    ]])
+  end
+end
+
 local castAt = setmetatable({}, {
     __index = function(t, self)
         local val = function (target,message)
             if target == nil then target = "target" end
 
             if self.needsSelect then
-                if self.needsSelectPlayer then
-                    kps.runMacro("/cast [@player] "..self.name)
-                else
-                    kps.runMacro("/cast [@cursor] "..self.name)
-                end
---              SetCVar("deselectOnClick", "0")
---              CastSpellByName(self.name)
---              CameraOrSelectOrMoveStart(1)
---              CameraOrSelectOrMoveStop(1)
---              SetCVar("deselectOnClick", "1")
+                _CastGroundSpellByName(self.name,target)
             else
                 _CastSpellByName(self.name,target)
             end
