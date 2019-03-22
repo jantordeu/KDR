@@ -55,7 +55,7 @@ kps.rotations.register("PRIEST","HOLY",{
     {spells.guardianSpirit, 'focus.isHealable and focus.hp < 0.30' , "focus" },
     --{spells.guardianSpirit, 'heal.lowestInRaid.hp < 0.30' , kps.heal.lowestInRaid},
     
-    -- "Holy Word: Serenity" -- set at 0.55 to avoid spam FH
+    -- "Holy Word: Serenity"
     {{spells.holyWordSerenity,spells.prayerOfHealing}, 'not player.isMoving and heal.countLossInRange(0.80) > 2 and heal.lowestTankInRaid.hp < 0.65' , kps.heal.lowestTankInRaid , "POH_holyWordSerenity" },
     {{spells.holyWordSerenity,spells.prayerOfHealing}, 'not player.isMoving and heal.countLossInRange(0.80) > 2 and heal.lowestInRaid.hp < 0.40' , kps.heal.lowestInRaid , "POH_holyWordSerenity" },
     {spells.holyWordSerenity, 'heal.lowestTankInRaid.hp < 0.65' , kps.heal.lowestTankInRaid},
@@ -69,7 +69,8 @@ kps.rotations.register("PRIEST","HOLY",{
     -- "Holy Word: Sanctify" -- macro does not work for @target, @mouseover... ONLY @cursor and @player -- Cooldown reduced by 6 sec when you cast Prayer of Healing and by 2 sec when you cast Renew
     {{"macro"}, 'keys.shift', "/cast [@cursor] "..HolyWordSanctify },
     {{"macro"}, 'mouseover.isHealable and mouseover.isRaidTank and mouseover.hp < 0.80', "/cast [@cursor] "..HolyWordSanctify },
-    {{"macro"},'heal.countLossInDistance(0.80,10) > 2' , "/cast [@player] "..HolyWordSanctify },
+    {{"macro"}, 'heal.countLossInDistance(0.80,10) > 2' , "/cast [@player] "..HolyWordSanctify },
+    {{"macro"}, 'player.hasTalent(7,3) and spells.holyWordSalvation.cooldown > 6 and heal.countLossInDistance(0.95,10) > 2' , "/cast [@player] "..HolyWordSanctify },
 
     -- "Dispel" "Purifier" 527
     {spells.purify, 'mouseover.isHealable and mouseover.isDispellable("Magic")' , "mouseover" },
@@ -144,8 +145,8 @@ kps.rotations.register("PRIEST","HOLY",{
     -- SLOT 1 /use 14
     {{"macro"}, 'player.timeInCombat > 30 and player.useTrinket(1) and heal.countLossInRange(0.80) > 3' , "/use 14" },
 
-    {spells.circleOfHealing, 'heal.lowestTankInRaid.hp < 0.90 and heal.lowestUnitInRaid.hp < 0.90' , kps.heal.lowestTankInRaid },
-    {spells.circleOfHealing, 'heal.countLossInRange(0.90) > 2' , kps.heal.lowestInRaid },
+    {spells.circleOfHealing, 'heal.lowestTankInRaid.hp < 0.95 and heal.lowestUnitInRaid.hp < 0.95' , kps.heal.lowestTankInRaid },
+    {spells.circleOfHealing, 'heal.countLossInRange(0.95) > 2' , kps.heal.lowestInRaid },
     {spells.halo, 'not player.isMoving and player.hasTalent(6,3) and heal.countLossInRange(0.90) > 2' , kps.heal.lowestInRaid },
     {spells.divineStar, 'player.hasTalent(6,2) and heal.countLossInRange(0.90) > 2 and target.distance <= 30' , "target" },
     {spells.holyNova, 'kps.holyNova' , "target" },
