@@ -126,7 +126,7 @@ kps.combatStep = function ()
         local spell, target, message = activeRotation.getSpell()
         if player.pause then return end
 
-        if spell ~= nil and spell.cast ~= nil and not player.isCasting then
+        if spell ~= nil and not player.isCasting then
             if prioritySpell ~= nil then
                 if prioritySpell.canBeCastAt("target") and prioritySpell.cooldown < 2 then
                 prioritySpell.cast()
