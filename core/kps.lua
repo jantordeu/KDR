@@ -116,7 +116,7 @@ kps.combatStep = function ()
                 spell.cast(castSequenceTarget,castSequenceMessage)
             end
         else
-            castSequenceIndex = nil
+            castSequenceIndex = 0
             castSequence = nil
         end
     else
@@ -124,7 +124,6 @@ kps.combatStep = function ()
         if not activeRotation then return end
         activeRotation.checkTalents()
         local spell, target, message = activeRotation.getSpell()
-        if player.pause then return end
 
         if spell ~= nil and not player.isCasting then
             if prioritySpell ~= nil then
@@ -159,7 +158,7 @@ hooksecurefunc("UseAction", function(...)
             local spell = kps.Spell.fromId(id)
             if prioritySpell == nil and spell.isPrioritySpell then
                 prioritySpell = spell
-                LOG.warn("Set %s for next cast.", spell.name)
+                LOG.debug("Set %s for next cast.", spell.name)
             end
         end
         if stype == "item" then

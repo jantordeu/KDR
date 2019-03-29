@@ -117,6 +117,7 @@ function kps.env.priest.damageTarget()
     elseif UnitIsAttackable("focus") then return "focus"
     elseif UnitIsAttackable("focustarget") then return "focustarget"
     elseif UnitIsAttackable("mouseovertarget") then return "mouseovertarget"
+    elseif UnitIsAttackable("mouseover") then return "mouseover"
     else return kps.env.heal.enemyLowest -- kps.env.heal.enemyTarget
     end
 end
@@ -180,8 +181,9 @@ local ShouldInterruptCasting = function (interruptTable, countLossInRange)
     local spellCasting, _, _, _, endTime, _, _, _, _ = UnitCastingInfo("player")
     if spellCasting == nil then return false end
     if endTime == nil then return false end
-    local targetHealth = UnitHealth(kps.lastTarget) / UnitHealthMax(kps.lastTarget)
     local target = kps.lastTarget
+    local targetHealth = UnitHealth(kps.lastTarget) / UnitHealthMax(kps.lastTarget)
+
 
     for key, healSpellTable in pairs(interruptTable) do
         local breakpoint = healSpellTable[2]

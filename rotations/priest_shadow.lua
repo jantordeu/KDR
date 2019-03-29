@@ -103,16 +103,10 @@ kps.rotations.register("PRIEST","SHADOW",{
     {spells.vampiricTouch, 'focus.isAttackable and not player.isMoving and focus.myDebuffDuration(spells.vampiricTouch) < 6.3 and not spells.vampiricTouch.isRecastAt("focus")' , 'focus' },
     {spells.shadowWordPain, 'focus.isAttackable and focus.myDebuffDuration(spells.shadowWordPain) < 4.8' , 'focus' },
     
-    {{"nested"}, 'not player.hasBuff(spells.voidForm) and mouseover.inCombat and mouseover.isAttackable',{
-        {spells.vampiricTouch, 'not player.isMoving  and mouseover.myDebuffDuration(spells.vampiricTouch) < 6.3 and not spells.vampiricTouch.isRecastAt("mouseover")' , 'mouseover' },
-        {spells.shadowWordPain, 'mouseover.myDebuffDuration(spells.shadowWordPain) < 4.8' , 'mouseover' },
-    }},
-    
     {spells.darkAscension, 'player.hasTalent(7,2) and not player.hasBuff(spells.voidForm) and player.insanity < 90' , "target" , "darkAscension" },
     {spells.voidEruption, 'not player.isMoving and spells.voidEruption.isUsable and not player.hasBuff(spells.voidForm)' , "target" , "insanity_usable" },
 
     {spells.mindSear, 'kps.multiTarget and not player.isMoving' , env.damageTarget },
-    {spells.mindSear, 'not player.isMoving and player.plateCount >= 5' , env.damageTarget },
     {spells.mindBlast, 'not player.isMoving and player.plateCount <= 3' , env.damageTarget },
     {spells.mindSear, 'not player.isMoving and player.plateCount >= 3' , env.damageTarget },
 
