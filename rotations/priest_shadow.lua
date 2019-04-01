@@ -65,9 +65,9 @@ kps.rotations.register("PRIEST","SHADOW",{
     {spells.mindControl, 'kps.focusControl and focus.isAttackable and not focus.hasMyDebuff(spells.mindControl) and focus.myDebuffDuration(spells.mindControl) < 2' , "focus" },
 
     -- TRINKETS "Trinket0Slot" est slotId  13 "Trinket1Slot" est slotId  14
-    {{"macro"}, 'player.useTrinket(0) and player.hasBuff(spells.voidForm)' , "/use 13"},
-    {{"macro"}, 'not player.hasTrinket(1) == 165569 and player.useTrinket(1) and player.hasBuff(spells.voidForm)' , "/use 14"},
-    {{"macro"}, 'player.hasTrinket(1) == 165569 and player.useTrinket(1) and not player.hasBuff(spells.voidForm) and player.hp < 0.82' , "/use [@player] 14" },
+    {{"macro"}, 'player.useTrinket(0) and player.hasBuff(spells.voidForm) and player.timeInCombat > 30' , "/use 13"},
+    {{"macro"}, 'not player.hasTrinket(1) == 165569 and player.useTrinket(1) and player.hasBuff(spells.voidForm) and player.timeInCombat > 30' , "/use 14"},
+    {{"macro"}, 'player.hasTrinket(1) == 165569 and player.useTrinket(1) and not player.hasBuff(spells.voidForm) and player.hp < 0.82 and player.timeInCombat > 30' , "/use [@player] 14" },
 
     -- "Levitate" 1706
     {spells.levitate, 'player.isFallingFor(1.4) and not player.hasBuff(spells.levitate)' , "player" },
@@ -82,7 +82,7 @@ kps.rotations.register("PRIEST","SHADOW",{
     --{spells.shadowWordDeath, 'player.hasTalent(5,2) and target.hp < 0.20 and target.isAttackable' , "target" },
 
     --{{"macro"}, 'player.hasBuff(spells.voidForm) and spells.voidBolt.cooldown == 0 and spells.mindFlay.cooldownTotal == 0 and player.isCastingSpell(spells.mindFlay)' , "/stopcasting" },
-    {{"macro"}, 'player.hasBuff(spells.voidForm) and spells.voidBolt.cooldown == 0 and spells.mindSear.cooldownTotal == 0 and player.isCastingSpell(spells.mindSear) and player.plateCount <= 3' , "/stopcasting" },
+    {{"macro"}, 'not kps.multiTarget and player.hasBuff(spells.voidForm) and spells.voidBolt.cooldown == 0 and spells.mindSear.cooldownTotal == 0 and player.isCastingSpell(spells.mindSear) and player.plateCount <= 3' , "/stopcasting" },
     {spells.voidBolt , 'player.hasBuff(spells.voidForm)' , env.damageTarget },
     {spells.shadowfiend, 'player.hasBuff(spells.voidForm) and player.buffStacks(spells.voidForm) < 9' , env.damageTarget },
     {spells.mindbender, 'player.hasBuff(spells.voidForm) and player.buffStacks(spells.voidForm) < 9' , env.damageTarget },

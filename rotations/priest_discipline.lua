@@ -82,10 +82,10 @@ kps.rotations.register("PRIEST","DISCIPLINE",{
     -- TRINKETS -- SLOT 0 /use 13
     -- "Inoculating Extract" 160649 -- "Extrait d’inoculation" 160649
     --{{"macro"}, 'player.hasTrinket(0) == 160649 and player.useTrinket(0) and targettarget.exists and targettarget.isHealable' , "/use [@targettarget] 13" },
-    {{"macro"}, 'player.useTrinket(0) and player.timeInCombat > 9' , "/use 13" },
+    {{"macro"}, 'player.useTrinket(0) and player.timeInCombat > 30' , "/use 13" },
     -- TRINKETS -- SLOT 1 /use 14
-    {{"macro"}, 'not player.hasTrinket(1) == 165569 and player.useTrinket(1) and player.timeInCombat > 9' , "/use [@player] 14" },
-    {{"macro"}, 'player.hasTrinket(1) == 165569 and player.useTrinket(1) and player.timeInCombat > 9 and player.hp < 0.82' , "/use [@player] 14" },
+    {{"macro"}, 'not player.hasTrinket(1) == 165569 and player.useTrinket(1) and player.timeInCombat > 30' , "/use [@player] 14" },
+    {{"macro"}, 'player.hasTrinket(1) == 165569 and player.useTrinket(1) and player.timeInCombat > 30 and player.hp < 0.82' , "/use [@player] 14" },
     
     -- NOT ISINGROUP
     {{"nested"}, 'kps.multiTarget' , {
@@ -158,15 +158,15 @@ kps.rotations.register("PRIEST","DISCIPLINE",{
     {spells.rapture, 'spells.powerWordRadiance.charges == 0 and spells.powerWordRadiance.lastCasted(7) and heal.hasNotBuffAtonementCount(0.65) >= 3' },
 
     {spells.powerWordSolace, 'player.hasTalent(3,3)' , env.damageTarget },
+    {spells.holyNova, 'kps.holyNova' },
     {spells.divineStar, 'player.hasTalent(6,2) and heal.countLossInRange(0.90) >= 3 and target.distance <= 30' , "target" },
     {spells.halo, 'not player.isMoving and player.hasTalent(6,3) and heal.countLossInRange(0.90) >= 3' , kps.heal.lowestInRaid },
     {spells.shadowCovenant, 'player.hasTalent(5,3) and heal.countLossInRange(0.82) >= 3' , kps.heal.lowestInRaid },
     {spells.luminousBarrier, 'player.hasTalent(7,2) and heal.countLossInRange(0.82)*2 > heal.countInRange' },
-    {spells.shadowWordPain, 'heal.lowestInRaid.hp > 0.82 and target.isAttackable and target.myDebuffDuration(spells.shadowWordPain) < 4.8 and not spells.shadowWordPain.isRecastAt("target")' , "target", "pain_target" },      
     {spells.schism, 'not player.isMoving and player.hasTalent(1,3) and heal.hasBuffAtonementCount(0.82) >= 3' , env.damageTarget , "schism_count" },
     {spells.schism, 'not player.isMoving and player.hasTalent(1,3) and heal.hasBuffAtonement.hp < 0.65' , env.damageTarget , "schism_low" },
     {spells.penance, 'heal.hasBuffAtonement.hp < 0.92' , env.damageTarget  , "penance_offensive" },
-    {spells.holyNova, 'kps.holyNova' },
+    {spells.shadowWordPain, 'target.isAttackable and target.myDebuffDuration(spells.shadowWordPain) < 4.8 and not spells.shadowWordPain.isRecastAt("target")' , "target", "pain_target" },
     {spells.holyNova, 'player.isMoving and heal.countLossInDistance(0.92,10) >= 3' },
 
      -- MOUSEOVER
