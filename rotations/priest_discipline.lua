@@ -42,9 +42,10 @@ kps.rotations.register("PRIEST","DISCIPLINE",{
     -- "Power Word: Barrier" 62618
     {{"macro"}, 'keys.shift', "/cast [@cursor] "..Barriere },
     
-   {spells.painSuppression, 'heal.lowestTankInRaid.hp < 0.40' , kps.heal.lowestTankInRaid },
-   {spells.painSuppression, 'mouseover.isHealable and mouseover.hp < 0.40' , "mouseover" },
-   {spells.painSuppression, 'player.hp < 0.40' , "player" },
+   {spells.painSuppression, 'heal.lowestTankInRaid.hp < 0.30' , kps.heal.lowestTankInRaid },
+   {spells.painSuppression, 'player.hp < 0.30' , "player" },
+   {spells.painSuppression, 'mouseover.isHealable and mouseover.hp < 0.30' , "mouseover" },
+   {spells.painSuppression, 'focus.isHealable and focus.hp < 0.30' , "focus" },
 
     -- "Dissipation de la magie" -- Dissipe la magie sur la cible ennemie, supprimant ainsi 1 effet magique bénéfique.
     {spells.dispelMagic, 'target.isAttackable and target.isBuffDispellable and not spells.dispelMagic.lastCasted(7)' , "target" },
@@ -61,18 +62,18 @@ kps.rotations.register("PRIEST","DISCIPLINE",{
     -- "Dispel" "Purifier" 527
     {spells.purify, 'mouseover.isHealable and mouseover.isDispellable("Magic")' , "mouseover" },
     {{"nested"},'kps.cooldowns', {
-        {spells.purify, 'player.isDispellable("Magic")' , "player" },
         {spells.purify, 'heal.lowestTankInRaid.isDispellable("Magic")' , kps.heal.lowestTankInRaid},
+        {spells.purify, 'player.isDispellable("Magic")' , "player" },
         {spells.purify, 'heal.lowestInRaid.isDispellable("Magic")' , kps.heal.lowestInRaid},
-        {spells.purify, 'heal.isMagicDispellable' , kps.heal.isMagicDispellable , "DISPEL" },
+        {spells.purify, 'heal.isMagicDispellable' , kps.heal.isMagicDispellable },
     }},
 
     --{spells.fireBlood, 'player.isDispellable("Magic") or player.isDispellable("Disease") or player.isDispellable("Poison") or player.isDispellable("Curse")' , "player" },
-    {spells.giftOfTheNaaru, 'player.hp < 0.70' , "player" },
-    {spells.desperatePrayer, 'player.hp < 0.70' , "player" },
     {{"macro"}, 'player.hp < 0.70 and player.useItem(5512)' , "/use item:5512" },
+    {spells.giftOfTheNaaru, 'player.hp < 0.70' , "player" },
+    {spells.desperatePrayer, 'player.hp < 0.55' , "player" },
     -- "Angelic Feather"
-    {{"macro"},'player.hasTalent(2,3) and not player.isSwimming and player.isMovingFor(2) and not player.hasBuff(spells.angelicFeather)' , "/cast [@player] "..AngelicFeather },
+    {{"macro"},'player.hasTalent(2,3) and not player.isSwimming and player.isMovingFor(1.2) and not player.hasBuff(spells.angelicFeather)' , "/cast [@player] "..AngelicFeather },
     -- "Levitate" 1706
     {spells.levitate, 'player.isFallingFor(1.6) and not player.hasBuff(spells.levitate)' , "player" },
     -- "Body and Soul"
@@ -95,6 +96,7 @@ kps.rotations.register("PRIEST","DISCIPLINE",{
         {spells.shadowMend, 'not player.isMoving and mouseover.isFriend and mouseover.hp < 0.65 and not spells.shadowMend.isRecastAt("mouseover")' , "mouseover" },
         {spells.shadowMend, 'not player.isMoving and player.hp < 0.65 and not spells.shadowMend.isRecastAt("player")' , "player" },
         {spells.shadowMend, 'not player.isMoving and heal.lowestTankInRaid.hp < 0.65 and not spells.shadowMend.isRecastAt(heal.lowestTankInRaid.unit)' , kps.heal.lowestTankInRaid },
+        {spells.holyNova, 'kps.holyNova' },
         {spells.shadowWordPain, 'target.isAttackable and target.myDebuffDuration(spells.shadowWordPain) < 4.8 and not spells.shadowWordPain.isRecastAt("target")' , "target" },
         {spells.shadowWordPain, 'mouseover.isAttackable and mouseover.inCombat and mouseover.myDebuffDuration(spells.shadowWordPain) < 4.8 and not spells.shadowWordPain.isRecastAt("mouseover")' , "mouseover" },
         {spells.powerWordSolace, 'player.hasTalent(3,3) and target.isAttackable' , "target" },

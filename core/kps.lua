@@ -92,15 +92,25 @@ local function handlePriorityActions()
     return true
 end
 
+local combatStarted = -1
+kps.timeInCombat = 0
+
 kps.combatStep = function ()
+    -- Check for combat
+    if not InCombatLockdown() and not kps.autoAttackEnabled then
+        combatStarted = -1
+        kps.timeInCombat = 0
+        return
+    end
+    
+    if combatStarted < 0 then combatStarted = time() end
+    kps.timeInCombat = time() - combatStarted
+    
     -- Check for rotation
     if not kps.rotations.getActive() then
         kps.write("KPS does not have a rotation for your class (", kps.classes.className() ,") or spec (", kps.classes.specName(), ")!")
         kps.enabled = false
     end
-    
-    -- Check for combat
-    if not InCombatLockdown() or not kps.autoAttackEnabled then return end
 
     local player = kps.env.player
 
@@ -127,10 +137,10 @@ kps.combatStep = function ()
 
         if spell ~= nil and not player.isCasting then
             if prioritySpell ~= nil then
-                if prioritySpell.canBeCastAt("target") and prioritySpell.cooldown < 2 then
-                prioritySpell.cast()
-                LOG.warn("Priority Spell %s was casted.", prioritySpell)
-                prioritySpell = nil
+                if prioritySpell.canBeCastAt("target") then
+                    prioritySpell.cast()
+                    LOG.warn("Priority Spell %s was casted.", prioritySpell)
+                    prioritySpell = nil
                 else
                     if prioritySpell.cooldown > 2 then prioritySpell = nil end
                     spell.cast(target,message)

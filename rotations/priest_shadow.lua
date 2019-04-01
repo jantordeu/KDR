@@ -100,6 +100,7 @@ kps.rotations.register("PRIEST","SHADOW",{
     {spells.shadowWordPain, 'player.isMoving and focus.isAttackable and focus.myDebuffDuration(spells.shadowWordPain) < 11.2' , "focus" },
     {spells.shadowWordPain, 'player.isMoving and mouseover.inCombat and mouseover.isAttackable and mouseover.myDebuffDuration(spells.shadowWordPain) < 11.2' , "mouseover" },
 
+    {{spells.vampiricTouch,spells.shadowWordPain}, 'focus.isAttackable and not player.isMoving and focus.myDebuffDuration(spells.vampiricTouch) < 6.3 and focus.myDebuffDuration(spells.shadowWordPain) < 4.8 and not spells.vampiricTouch.isRecastAt("focus")' , 'focus' },
     {spells.vampiricTouch, 'focus.isAttackable and not player.isMoving and focus.myDebuffDuration(spells.vampiricTouch) < 6.3 and not spells.vampiricTouch.isRecastAt("focus")' , 'focus' },
     {spells.shadowWordPain, 'focus.isAttackable and focus.myDebuffDuration(spells.shadowWordPain) < 4.8' , 'focus' },
     

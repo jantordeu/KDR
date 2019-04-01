@@ -136,7 +136,6 @@ local function fnParseMacro(macroText, conditionFn)
                if kps.debug then print("StopCasting") end
             end
         end
-        -- Macro always return nil,nil to allow other spells to be cast! Actual macro casting is done within this function!
         return nil, nil
     end
 end
