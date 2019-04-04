@@ -54,7 +54,7 @@ kps.rotations.register("PRIEST","SHADOW",{
     -- "Dissipation de la magie" -- Dissipe la magie sur la cible ennemie, supprimant ainsi 1 effet magique bénéfique.
     {spells.dispelMagic, 'target.isAttackable and target.isBuffDispellable and not spells.dispelMagic.lastCasted(6)' , "target" },
     {spells.dispelMagic, 'mouseover.isAttackable and mouseover.isBuffDispellable and not spells.dispelMagic.lastCasted(6)' , "mouseover" },
-    {spells.arcaneTorrent, 'player.timeInCombat > 9 and target.isAttackable and target.distance <= 10' , "target" },
+    {spells.arcaneTorrent, 'player.timeInCombat > 30 and target.isAttackable and target.distance <= 10' , "target" },
 
     -- "Purify Disease" 213634
     {{"nested"}, 'kps.cooldowns',{
@@ -71,7 +71,7 @@ kps.rotations.register("PRIEST","SHADOW",{
 
     -- "Levitate" 1706
     {spells.levitate, 'player.isFallingFor(1.4) and not player.hasBuff(spells.levitate)' , "player" },
-    {spells.levitate, 'player.isSwimming and not player.hasBuff(spells.levitate)' , "player" },
+
     -- "Power Word: Shield" 17 -- "Body and Soul"
     {spells.powerWordShield, 'player.hasTalent(2,1) and player.isMovingFor(1.2) and not player.hasBuff(spells.bodyAndSoul) and not player.hasDebuff(spells.weakenedSoul)' , "player" , "SCHIELD_MOVING" },
     {spells.powerWordShield, 'player.hp < 0.55 and not player.hasBuff(spells.powerWordShield) and not player.hasBuff(spells.vampiricEmbrace) and not player.hasDebuff(spells.weakenedSoul)' , "player" , "SCHIELD_HEALTH" },
@@ -80,6 +80,7 @@ kps.rotations.register("PRIEST","SHADOW",{
 
     --{{"macro"}, 'player.hasTalent(5,3) and mouseover.isAttackable', "/cast [@cursor] "..ShadowCrash },
     --{spells.shadowWordDeath, 'player.hasTalent(5,2) and target.hp < 0.20 and target.isAttackable' , "target" },
+    {spells.voidEruption, 'not player.isMoving and player.insanity > 90 and not player.hasBuff(spells.voidForm)' , "target" , "insanity_usable" },
 
     --{{"macro"}, 'player.hasBuff(spells.voidForm) and spells.voidBolt.cooldown == 0 and spells.mindFlay.cooldownTotal == 0 and player.isCastingSpell(spells.mindFlay)' , "/stopcasting" },
     {{"macro"}, 'not kps.multiTarget and player.hasBuff(spells.voidForm) and spells.voidBolt.cooldown == 0 and spells.mindSear.cooldownTotal == 0 and player.isCastingSpell(spells.mindSear) and player.plateCount <= 3' , "/stopcasting" },
@@ -87,12 +88,12 @@ kps.rotations.register("PRIEST","SHADOW",{
     {spells.shadowfiend, 'player.hasBuff(spells.voidForm) and player.buffStacks(spells.voidForm) < 9' , env.damageTarget },
     {spells.mindbender, 'player.hasBuff(spells.voidForm) and player.buffStacks(spells.voidForm) < 9' , env.damageTarget },
 
-    {spells.darkVoid, 'not player.isMoving and player.hasTalent(3,3) and not player.hasBuff(spells.voidForm)' , env.damageTarget , "darkVoid" },
     {spells.mindBlast, 'not player.hasBuff(spells.voidForm) and not player.isMoving and not spells.voidEruption.isUsable' , env.damageTarget },
+    {spells.darkVoid, 'not player.isMoving and player.hasTalent(3,3) and not player.hasBuff(spells.voidForm)' , env.damageTarget , "darkVoid" },
+    {{spells.vampiricTouch,spells.shadowWordPain}, 'target.isAttackable and not player.isMoving and target.myDebuffDuration(spells.vampiricTouch) < 6.3 and target.myDebuffDuration(spells.shadowWordPain) < 4.8 and not spells.vampiricTouch.isRecastAt("target")' , 'target' },
     {spells.vampiricTouch, 'not player.isMoving and target.myDebuffDuration(spells.vampiricTouch) < 6.3 and target.isAttackable and not spells.vampiricTouch.isRecastAt("target")' , "target" },
     {spells.shadowWordPain, 'target.myDebuffDuration(spells.shadowWordPain) < 4.8 and target.isAttackable' , "target" },
-    
-    {spells.voidEruption, 'not player.isMoving and player.insanity > 90 and not player.hasBuff(spells.voidForm)' , "target" , "insanity_usable" },
+    {spells.mindSear, 'kps.multiTarget and not player.isMoving and player.hasBuff(spells.voidForm)' , env.damageTarget },
 
     -- Pandemic allow DoTs to be refreshed upto 30% -- myDebuffDurationMax(spells.vampiricTouch) == 27.3 -- duration(21) + 30% (6.3)
     -- Pandemic allow DoTs to be refreshed upto 30% -- myDebuffDurationMax(spells.shadowWordPain) == 20.8 -- duration(16) + 30% (4.8)
@@ -107,7 +108,6 @@ kps.rotations.register("PRIEST","SHADOW",{
     {spells.darkAscension, 'player.hasTalent(7,2) and not player.hasBuff(spells.voidForm) and player.insanity < 90' , "target" , "darkAscension" },
     {spells.voidEruption, 'not player.isMoving and spells.voidEruption.isUsable and not player.hasBuff(spells.voidForm)' , "target" , "insanity_usable" },
 
-    {spells.mindSear, 'kps.multiTarget and not player.isMoving' , env.damageTarget },
     {spells.mindBlast, 'not player.isMoving and player.plateCount <= 3' , env.damageTarget },
     {spells.mindSear, 'not player.isMoving and player.plateCount >= 3' , env.damageTarget },
 

@@ -50,7 +50,7 @@ kps.rotations.register("PRIEST","DISCIPLINE",{
     -- "Dissipation de la magie" -- Dissipe la magie sur la cible ennemie, supprimant ainsi 1 effet magique bénéfique.
     {spells.dispelMagic, 'target.isAttackable and target.isBuffDispellable and not spells.dispelMagic.lastCasted(7)' , "target" },
     {spells.dispelMagic, 'mouseover.isAttackable and mouseover.isBuffDispellable and not spells.dispelMagic.lastCasted(7)' , "mouseover" },   
-    {spells.arcaneTorrent, 'player.timeInCombat > 9 and target.isAttackable and target.distance <= 10' , "target" },
+    {spells.arcaneTorrent, 'player.timeInCombat > 30 and target.isAttackable and target.distance <= 10' , "target" },
 
     {spells.mindControl, 'kps.focusControl and focus.isAttackable and not focus.hasMyDebuff(spells.mindControl) and focus.myDebuffDuration(spells.mindControl) < 2' , "focus" },
     {{"nested"}, 'kps.interrupt' ,{
@@ -75,7 +75,7 @@ kps.rotations.register("PRIEST","DISCIPLINE",{
     -- "Angelic Feather"
     {{"macro"},'player.hasTalent(2,3) and not player.isSwimming and player.isMovingFor(1.2) and not player.hasBuff(spells.angelicFeather)' , "/cast [@player] "..AngelicFeather },
     -- "Levitate" 1706
-    {spells.levitate, 'player.isFallingFor(1.6) and not player.hasBuff(spells.levitate)' , "player" },
+    {spells.levitate, 'player.isFallingFor(1.4) and not player.hasBuff(spells.levitate)' , "player" },
     -- "Body and Soul"
     {spells.powerWordShield, 'player.hasTalent(2,1) and player.isMovingFor(1.2) and not player.hasBuff(spells.bodyAndSoul) and not player.hasDebuff(spells.weakenedSoul)' , "player", "SCHIELD_MOVING" },
 
