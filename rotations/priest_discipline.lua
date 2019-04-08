@@ -131,7 +131,7 @@ kps.rotations.register("PRIEST","DISCIPLINE",{
     {spells.shadowMend, 'not player.isMoving and heal.lowestTankInRaid.hp < 0.40 and not spells.shadowMend.isRecastAt(heal.lowestTankInRaid.unit)' , kps.heal.lowestTankInRaid },
     {spells.powerWordShield, 'heal.lowestTankInRaid.myBuffDuration(spells.atonement) < 2 and not heal.lowestTankInRaid.hasDebuff(spells.weakenedSoul)' , kps.heal.lowestTankInRaid , "powerWordShield_tank" },
     {spells.penance, 'player.isMoving and heal.lowestTankInRaid.hp < 0.40' , kps.heal.lowestTankInRaid  , "penance_defensive" },
-    {spells.shadowMend, 'not player.isMoving and player.hp < 0.55 and player.myBuffDuration(spells.atonement) < 2' , "player" , "shadowMend_player" },
+    {spells.shadowMend, 'not player.isMoving and player.hp < 0.40 and player.myBuffDuration(spells.atonement) < 2' , "player" , "shadowMend_player" },
     {spells.shadowMend, 'not player.isMoving and player.hp < 0.40 and not spells.shadowMend.isRecastAt("player")' , "player" },
     {spells.powerWordShield, 'player.hp < 0.82 and player.myBuffDuration(spells.atonement) < 2 and not player.hasDebuff(spells.weakenedSoul)' , "player" , "powerWordShield_player" },
     {spells.penance, 'player.isMoving and player.hp < 0.40' , "player"  , "penance_defensive" },

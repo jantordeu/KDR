@@ -77,19 +77,10 @@ end
 --[[[
 @function `<UNIT>.isHealable` - returns true if the given unit is healable by the player.
 ]]--
-local exclude = {"Xaraac"}
-local function excludeUnit(unit)
-	for _,name in ipairs(exclude) do
-    	if string.find(GetUnitName(unit),name) then return true end
-	end
-	return false
-end
-
 function Unit.isHealable(self)
     if self.unit == "player" and not UnitIsDeadOrGhost("player") and not Unit.hasBuff(self)(kps.Spell.fromId(20711)) then return true end -- UnitIsDeadOrGhost(unit) Returns false for priests who are currently in [Spirit of Redemption] form
     if not Unit.exists(self) then return false end
     if Unit.inVehicle(self) then return false end
-    --if excludeUnit(self.unit) then return false end
     if not Unit.lineOfSight(self) then return false end
     if Unit.immuneHeal(self) then return false end
     if not UnitCanAssist("player",self.unit) then return false end -- UnitCanAssist(unitToAssist, unitToBeAssisted) return 1 if the unitToAssist can assist the unitToBeAssisted, nil otherwise
