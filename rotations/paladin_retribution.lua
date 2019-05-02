@@ -65,7 +65,11 @@ kps.rotations.register("PALADIN","RETRIBUTION",
     {spells.shieldOfVengeance, 'player.plateCount >= 3 and target.distance <= 10'},
    
     {spells.inquisition, 'player.hasTalent(7,3) and player.holyPower > 2 and player.myBuffDuration(spells.inquisition) <= 20 and target.isAttackable' , "target" , "inquisition" },
-    
+    {spells.avengingWrath, 'player.hasTalent(7,3) and player.myBuffDuration(spells.inquisition) >= 20 and target.isAttackable and target.distance <= 10' },
+    {spells.avengingWrath, 'player.hasTalent(7,1) and target.isAttackable and target.distance <= 10' },
+    -- crusade replace avengingWrath
+    {spells.crusade, 'player.hasTalent(7,2) and player.holyPower >= 3 and target.isAttackable and target.distance <= 10' },
+
     {spells.divineStorm, 'player.holyPower == 5 and player.plateCount > 2 and target.isAttackable' , "target" , "divineStorm_5" },
     {spells.templarsVerdict, 'player.holyPower == 5 and target.isAttackable' , "target" , "templarsVerdict_5" },
     {spells.divineStorm, 'player.hasBuff(spells.empyreanPower) and target.isAttackable' , "target" , "divineStorm_empyreanPower" },
@@ -81,12 +85,6 @@ kps.rotations.register("PALADIN","RETRIBUTION",
         {spells.wakeOfAshes, 'player.hasTalent(7,2) and spells.crusade.cooldown > 45' , "target" , "wakeOfAshes_crusade_cd" },
     }},
 
-    {{"nested"}, 'target.isElite or player.plateCount > 1', {
-        {spells.avengingWrath, 'player.hasTalent(7,3) and player.myBuffDuration(spells.inquisition) >= 20 and target.isAttackable and target.distance <= 10' },
-        {spells.avengingWrath, 'player.hasTalent(7,1) and target.isAttackable and target.distance <= 10' },
-        -- crusade replace avengingWrath
-        {spells.crusade, 'player.hasTalent(7,2) and player.holyPower >= 3 and target.isAttackable and target.distance <= 10' },
-    }},
     -- "Empyrean Power" 286393 -- buff -- Your next Divine Storm is free and deals 0 additional damage.
     -- "Blade of Wrath" 281178 -- buff -- Your next Blade of Justice deals 25% increased damage.
     -- Templar's Verdict or Divine Storm at 3-4 Holy Power if following spells/buffs are active: Divine Purpose, Avenging Wrath/Crusade, Execution Sentence.

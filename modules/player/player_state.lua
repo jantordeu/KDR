@@ -83,10 +83,11 @@ end
 --[[[
 @function `<UNIT>.plateCount` - e.g. 'player.plateCount' returns namePlates count in combat (actives enemies)
 ]]--
+-- UnitIsPlayer("unit") --  Returns true if the specified unit is a player character, false otherwise.
 function Player.plateCount(self)
     local plateCount = 0
     for nameplate,_ in pairs(activeUnitPlates) do
-        if UnitAffectingCombat(nameplate) then plateCount = plateCount + 1 end
+        if UnitAffectingCombat(nameplate) and not UnitIsPlayer(nameplate) then plateCount = plateCount + 1 end
     end
     return plateCount
 end

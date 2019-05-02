@@ -55,7 +55,6 @@ kps.rotations.register("WARRIOR","FURY",
     -- "Souhait ardent de Kil'jaeden" 144259
     {{"macro"}, 'player.timeInCombat > 30 and player.useTrinket(0)' , "/use 13" },
     {{"macro"}, 'player.timeInCombat > 30 and player.useTrinket(1)' , "/use 14" },
-    
 
     {spells.rampage, 'player.myBuffDuration(spells.enrage) < kps.gcd' , "target" , "rampage_enrage" },
     {spells.rampage, 'player.rage >= 90' , "target" , "rampage_dumprage" },
@@ -86,7 +85,7 @@ kps.rotations.register("WARRIOR","FURY",
     	{spells.dragonRoar, 'true' , "target" , "dragonRoar" },
     	{spells.siegebreaker, 'player.hasTalent(6,2)' },
     }},
-    
+
 	-- "Siegebreaker" -- "Briseur de siège" -- increasing your damage done to the target by 15% for 10 sec.
 	-- "Dragon Roar" -- Physical damage to all enemies within 12 yds and reducing their movement speed by 50% for 6 sec.
     {{"nested"}, 'spells.recklessness.cooldown >= 30 and target.distance <= 10 and target.isAttackable', {
