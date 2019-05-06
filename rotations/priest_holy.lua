@@ -12,9 +12,9 @@ local SpiritOfRedemption = spells.spiritOfRedemption.name
 local MassDispel = spells.massDispel.name
 local AngelicFeather = spells.angelicFeather.name
 
-kps.runAtEnd(function()
-   kps.gui.addCustomToggle("PRIEST","HOLY", "mouseOver", "Interface\\Icons\\priest_spell_leapoffaith_a", "mouseOver")
-end)
+--kps.runAtEnd(function()
+--   kps.gui.addCustomToggle("PRIEST","HOLY", "mouseOver", "Interface\\Icons\\priest_spell_leapoffaith_a", "mouseOver")
+--end)
 
 kps.runAtEnd(function()
    kps.gui.addCustomToggle("PRIEST","HOLY", "holyNova", "Interface\\Icons\\spell_holy_holynova", "holyNova")
@@ -137,8 +137,8 @@ kps.rotations.register("PRIEST","HOLY",{
     {spells.divineStar, 'player.hasTalent(6,2) and heal.countLossInRange(0.90) > 2 and target.distance <= 30' , "target" },
 
     -- "Soins rapides" 2060 Important Unit
-    {spells.flashHeal, 'kps.mouseOver and mouseover.isHealable and mouseover.isUnit("player") and not player.isMoving and mouseover.hp < 0.40' , "mouseover" ,"FLASH_mouseover" },
-    {spells.flashHeal, 'kps.mouseOver and mouseover.isHealable and mouseover.isRaidTank and not player.isMoving and mouseover.hp < 0.40' , "mouseover" ,"FLASH_mouseover" },
+    {spells.flashHeal, 'mouseover.isHealable and mouseover.isUnit("player") and not player.isMoving and mouseover.hp < 0.40' , "mouseover" ,"FLASH_mouseover" },
+    {spells.flashHeal, 'mouseover.isHealable and mouseover.isRaidTank and not player.isMoving and mouseover.hp < 0.40' , "mouseover" ,"FLASH_mouseover" },
     {spells.flashHeal, 'not player.isMoving and spells.prayerOfMending.lastCasted(3.4) and heal.lowestTankInRaid.hp < 0.55' , kps.heal.lowestTankInRaid ,"FLASH_POM" },
     {spells.flashHeal, 'not player.isMoving and spells.prayerOfMending.lastCasted(3.4) and heal.lowestInRaid.hp < 0.40' , kps.heal.lowestInRaid ,"FLASH_POM" },
     -- "Prayer of Mending" (Tank only)
@@ -161,8 +161,8 @@ kps.rotations.register("PRIEST","HOLY",{
     -- "Soins rapides" 2060 Important Unit
     {spells.flashHeal, 'not player.isMoving and spells.prayerOfHealing.lastCasted(3.4) and heal.lowestTankInRaid.hp < 0.55' , kps.heal.lowestTankInRaid ,"FLASH_POH" },
     {spells.flashHeal, 'not player.isMoving and spells.prayerOfHealing.lastCasted(3.4) and heal.lowestInRaid.hp < 0.40' , kps.heal.lowestInRaid ,"FLASH_POH" },
-    {spells.prayerOfHealing, 'kps.mouseOver and mouseover.isHealable and not player.isMoving and mouseover.hp < 0.80 and heal.countLossInRange(0.80) > 3' , "mouseover" ,"POH_mouseover" },
-    {spells.flashHeal, 'kps.mouseOver and mouseover.isHealable and not player.isMoving and mouseover.hp < 0.55' , "mouseover" ,"FLASH_mouseover" },
+    {spells.prayerOfHealing, 'mouseover.isHealable and not player.isMoving and mouseover.hp < 0.80 and heal.countLossInRange(0.80) > 3' , "mouseover" ,"POH_mouseover" },
+    {spells.flashHeal, 'mouseover.isHealable and not player.isMoving and mouseover.hp < 0.55' , "mouseover" ,"FLASH_mouseover" },
     -- "Prayer of Healing" 596
     {spells.prayerOfHealing, 'not player.isMoving and heal.countLossInRange(0.80)*2 >= heal.countInRange and heal.countInRange >= 5' , kps.heal.lowestInRaid , "POH_count" },
     {spells.prayerOfHealing, 'not player.isMoving and heal.countLossInRange(0.80) > 2 and heal.countLossInRange(0.90) > 4' , kps.heal.lowestInRaid , "POH" },

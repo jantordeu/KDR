@@ -91,6 +91,7 @@ kps.rotations.register("PALADIN","RETRIBUTION",
     -- Righteous Verdict Talent(1,2) -- Templar's Verdict increases the damage of your next Templar's Verdict by 15% for 6 sec.
     
     {spells.divineStorm, 'player.plateCount > 2 and target.isAttackable' , "target" , "divineStorm" },
+    {spells.divineStorm, 'focus.isAttackable and target.isAttackable' , "target" , "divineStorm" },
     {spells.templarsVerdict, 'target.isAttackable' , "target" , "templarsVerdict" },
 
     {spells.judgment, 'target.isAttackable and target.distance <= 30' , "target" }, -- 10 sec cd -- Generates 1 Holy Power

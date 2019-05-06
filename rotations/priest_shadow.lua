@@ -16,6 +16,10 @@ kps.runAtEnd(function()
    kps.gui.addCustomToggle("PRIEST","SHADOW", "focusControl", "Interface\\Icons\\spell_nature_polymorph", "focusControl")
 end)
 
+kps.runAtEnd(function()
+   kps.gui.addCustomToggle("PRIEST","SHADOW", "mindSear", "Interface\\Icons\\spell_shadow_mindshear", "mindSear")
+end)
+
 
 kps.rotations.register("PRIEST","SHADOW",{
 
@@ -93,7 +97,7 @@ kps.rotations.register("PRIEST","SHADOW",{
     {spells.voidEruption, 'target.isAttackable and not player.isMoving and not player.hasBuff(spells.voidForm)' , "target" , "insanity_usable" },
 
     {{"nested"}, 'not player.hasBuff(spells.voidForm)',{
-        {spells.darkVoid, 'not player.isMoving and kps.cooldowns and player.hasTalent(3,3) and not player.hasBuff(spells.voidForm)' , env.damageTarget , "darkVoid" },
+        {spells.darkVoid, 'not player.isMoving and player.hasTalent(3,3)' , env.damageTarget , "darkVoid" },
         {spells.vampiricTouch, 'not player.isMoving and target.myDebuffDuration(spells.vampiricTouch) < 6.3 and target.isAttackable and not spells.vampiricTouch.isRecastAt("target")' , "target" },
         {spells.shadowWordPain, 'target.myDebuffDuration(spells.shadowWordPain) < 4.8 and target.isAttackable' , "target" },
         {spells.vampiricTouch, 'focus.isAttackable and not player.isMoving and focus.myDebuffDuration(spells.vampiricTouch) < 6.3 and not spells.vampiricTouch.isRecastAt("focus")' , 'focus' },
@@ -104,17 +108,16 @@ kps.rotations.register("PRIEST","SHADOW",{
     {{spells.vampiricTouch,spells.shadowWordPain}, 'target.isAttackable and not player.isMoving and target.myDebuffDuration(spells.vampiricTouch) < 6.3 and target.myDebuffDuration(spells.shadowWordPain) < 4.8 and not spells.vampiricTouch.isRecastAt("target")' , "target" },
     {spells.vampiricTouch, 'not player.isMoving and target.myDebuffDuration(spells.vampiricTouch) < 6.3 and target.isAttackable and not spells.vampiricTouch.isRecastAt("target")' , "target" },
     {spells.shadowWordPain, 'target.myDebuffDuration(spells.shadowWordPain) < 4.8 and target.isAttackable' , "target" },
-
-    --{spells.darkVoid, 'not player.isMoving and player.hasTalent(3,3) and player.plateCountDebuff(spells.shadowWordPain) < player.plateCount' , env.damageTarget , "darkVoid_count" },
-    {spells.mindSear, 'kps.multiTarget and not player.isMoving and player.hasBuff(spells.voidForm)' , env.damageTarget },
+    
+    {spells.darkVoid, 'not player.isMoving and player.hasTalent(3,3) and player.plateCountDebuff(spells.shadowWordPain) < player.plateCount' , env.damageTarget , "darkVoid_count" },
+    {spells.mindSear, 'kps.mindSear and not player.isMoving and player.hasBuff(spells.voidForm)' , env.damageTarget },
+    {spells.mindBlast, 'not player.isMoving and player.hasBuff(spells.voidForm)' , env.damageTarget },
 
     {{spells.vampiricTouch,spells.shadowWordPain}, 'focus.isAttackable and not player.isMoving and focus.myDebuffDuration(spells.vampiricTouch) < 6.3 and focus.myDebuffDuration(spells.shadowWordPain) < 4.8 and not spells.vampiricTouch.isRecastAt("focus")' , "focus" },
     {spells.vampiricTouch, 'focus.isAttackable and not player.isMoving and focus.myDebuffDuration(spells.vampiricTouch) < 6.3 and not spells.vampiricTouch.isRecastAt("focus")' , "focus"  },
     {spells.shadowWordPain, 'focus.isAttackable and focus.myDebuffDuration(spells.shadowWordPain) < 4.8' , "focus"  },
-
-    {spells.mindSear, 'player.plateCount > 4 and not player.isMoving and player.hasBuff(spells.voidForm)' , env.damageTarget },
-    {spells.mindBlast, 'not player.isMoving and player.hasBuff(spells.voidForm) and not focus.isAttackable' , env.damageTarget },
-    {spells.mindBlast, 'not player.isMoving and player.hasBuff(spells.voidForm) and focus.myDebuffDuration(spells.vampiricTouch) > 6.3 and focus.myDebuffDuration(spells.shadowWordPain) > 4.8' , env.damageTarget },
+    
+    {spells.mindSear, 'kps.multiTarget and player.plateCount > 2 and not player.isMoving' , env.damageTarget },
 
     {{spells.vampiricTouch,spells.shadowWordPain}, 'mouseover.inCombat and mouseover.isAttackable and not player.isMoving and mouseover.myDebuffDuration(spells.vampiricTouch) < 6.3 and mouseover.myDebuffDuration(spells.shadowWordPain) < 4.8 and not spells.vampiricTouch.isRecastAt("mouseover")' , "mouseover" },    
     {spells.vampiricTouch, 'not player.isMoving and mouseover.inCombat and mouseover.isAttackable and mouseover.myDebuffDuration(spells.vampiricTouch) < 6.3 and not spells.vampiricTouch.isRecastAt("mouseover")' , "mouseover" },
@@ -127,7 +130,6 @@ kps.rotations.register("PRIEST","SHADOW",{
     {spells.shadowWordPain, 'player.isMoving and mouseover.inCombat and mouseover.isAttackable and mouseover.myDebuffDuration(spells.shadowWordPain) < 11.2' , "mouseover" },
 
     {spells.mindBlast, 'not player.isMoving' , env.damageTarget },
-    {spells.mindSear, 'player.plateCount > 2 and not player.isMoving' , env.damageTarget },
     {spells.mindFlay, 'not player.isMoving and not player.isCastingSpell(spells.mindFlay)' , env.damageTarget },
 
 },"priest_shadow_bfa")
