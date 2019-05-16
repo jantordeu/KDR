@@ -73,25 +73,6 @@ kps.useItem = function(itemId)
     end
 end
 
-local function handlePriorityActions()
-    if priorityMacro ~= nil then
-        priorityMacro = nil
-    elseif priorityAction ~= nil then
-        priorityAction = nil
-    elseif prioritySpell ~= nil then
-        if prioritySpell.canBeCastAt("target") and prioritySpell.cooldown < 2 then
-            prioritySpell.cast()
-            LOG.warn("Priority Spell %s was casted.", prioritySpell)
-            prioritySpell = nil
-        else
-            if prioritySpell.cooldown > 2 then prioritySpell = nil end
-        end
-    else
-        return false
-    end
-    return true
-end
-
 local combatStarted = -1
 kps.timeInCombat = 0
 
