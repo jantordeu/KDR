@@ -8,7 +8,6 @@ local castSequenceTarget = 0
 local prioritySpell = nil
 local priorityAction = nil
 local priorityMacro = nil
-local castSequenceMessage = nil
 
 function _CastSpellByName(spell,target)
    target = target or "target"
@@ -104,7 +103,7 @@ kps.combatStep = function ()
             if spell.canBeCastAt(castSequenceTarget) and not player.isCasting then
                 LOG.warn("Cast-Sequence: %s. %s", castSequenceIndex, spell)
                 castSequenceIndex = castSequenceIndex + 1
-                spell.cast(castSequenceTarget,castSequenceMessage)
+                spell.cast(castSequenceTarget)
             end
         else
             castSequenceIndex = 0
@@ -119,7 +118,7 @@ kps.combatStep = function ()
         if spell ~= nil and not player.isCasting then
             if prioritySpell ~= nil then
                 if prioritySpell.canBeCastAt("target") then
-                    prioritySpell.cast()
+                    prioritySpell.cast(target)
                     LOG.warn("Priority Spell %s was casted.", prioritySpell)
                     prioritySpell = nil
                 else
@@ -132,7 +131,6 @@ kps.combatStep = function ()
                 castSequence = spell
                 castSequenceStartTime = GetTime()
                 castSequenceTarget = target
-                castSequenceMessage = message
             else
                 LOG.debug("Casting %s for next cast.", spell.name)
                 spell.cast(target,message)
