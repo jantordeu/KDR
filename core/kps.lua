@@ -9,50 +9,6 @@ local prioritySpell = nil
 local priorityAction = nil
 local priorityMacro = nil
 
-function _CastSpellByName(spell,target)
-   target = target or "target"
-   secured = false
-   while not secured do
-      RunScript([[
-         for index = 1, 100 do
-            if not issecure() then
-               return
-            end
-         end
-         secured = true
-         CastSpellByName("]] .. spell .. [[", "]] .. target .. [[")
-      ]])
-   end
-end
-
-function _RunMacroText(macroText)
-    macroText = macroText or ""
-    secured = false
-    while not secured do
-        RunScript([[
-        for index = 1, 100 do
-            if not issecure() then return end
-        end
-        secured = true
-        RunMacroText("]] .. macroText .. [[")
-    ]])
-   end
-end
-
-function _SpellStopCasting()
-   secured = false
-   while not secured do
-      RunScript([[
-         for index = 1, 100 do
-            if not issecure() then
-               return
-            end
-         end
-         secured = true
-         SpellStopCasting()
-      ]])
-   end
-end
 
 kps.runMacro = function(macroText)
     _RunMacroText(macroText)
@@ -158,3 +114,49 @@ hooksecurefunc("UseAction", function(...)
         end
     end
 end)
+
+
+function _CastSpellByName(spell,target)
+   target = target or "target"
+   secured = false
+   while not secured do
+      RunScript([[
+         for index = 1, 100 do
+            if not issecure() then
+               return
+            end
+         end
+         secured = true
+         CastSpellByName("]] .. spell .. [[", "]] .. target .. [[")
+      ]])
+   end
+end
+
+function _RunMacroText(macroText)
+    macroText = macroText or ""
+    secured = false
+    while not secured do
+        RunScript([[
+        for index = 1, 100 do
+            if not issecure() then return end
+        end
+        secured = true
+        RunMacroText("]] .. macroText .. [[")
+    ]])
+   end
+end
+
+function _SpellStopCasting()
+   secured = false
+   while not secured do
+      RunScript([[
+         for index = 1, 100 do
+            if not issecure() then
+               return
+            end
+         end
+         secured = true
+         SpellStopCasting()
+      ]])
+   end
+end
