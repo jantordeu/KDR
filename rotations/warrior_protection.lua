@@ -63,8 +63,8 @@ kps.rotations.register("WARRIOR","PROTECTION",
     {spells.thunderClap, 'target.distance <= 10'},
 
     {{"nested"}, 'player.hasTalent(6,2)', {
-        {spells.ignorePain, ' and player.hasBuff(spells.vengeanceIgnorePain) and player.myBuffDuration(spells.ignorePain) < 12 and player.buffValue(spells.ignorePain) < player.hpMax * 0.50' , "target", "ignorePain_buffvalue" },
-        {spells.ignorePain, 'player.hasTalent(6,2) and player.hasBuff(spells.vengeanceIgnorePain) and player.myBuffDuration(spells.ignorePain) < 3' , "target", "ignorePain_duration" },
+        {spells.ignorePain, 'player.myBuffDuration(spells.ignorePain) < 12 and player.buffValue(spells.ignorePain) < player.hpMax * 0.50' , "target", "ignorePain_buffvalue" },
+        {spells.ignorePain, 'player.hasTalent(6,2) and player.myBuffDuration(spells.ignorePain) < 3' , "target", "ignorePain_duration" },
         {spells.revenge, 'player.hasTalent(6,2) and player.hasBuff(spells.vengeanceRevenge) and player.myBuffDuration(spells.ignorePain) < 9' , "target", "revenge_buff" },
     }},
     
