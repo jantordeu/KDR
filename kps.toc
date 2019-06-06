@@ -1,8 +1,8 @@
 ## Interface: 80100
 ## Title: |cffff8000KDR Addon
 ## Notes: KPS darkrotation unlocker
-## SavedVariables: 
-## Dependencies: 
+## SavedVariables:
+## Dependencies:
 ## SavedVariablesPerCharacter: KPS_SETTINGS
 
 libs\LibStub-1.0\LibStub.lua
