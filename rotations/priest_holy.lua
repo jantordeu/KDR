@@ -62,11 +62,13 @@ kps.rotations.register("PRIEST","HOLY",{
     {spells.guardianSpirit, 'heal.lowestInRaid.hp < 0.30' , kps.heal.lowestInRaid},
     
     --AZERITE
-    {spells.concentratedFlame, 'heal.lowestInRaid.hp < 0.55' , kps.heal.lowestInRaid },
-    {spells.memoryOfLucidDreams, 'heal.lowestInRaid.hp < 0.55' , kps.heal.lowestInRaid },
+    {spells.concentratedFlame, 'heal.lowestInRaid.hp < 0.65' , kps.heal.lowestInRaid },
     {spells.refreshment, 'player.buffValue(spells.theWellOfExistence) > 35000 and heal.lowestTankInRaid.hp < 0.65' , kps.heal.lowestTankInRaid},
     {spells.refreshment, 'player.buffValue(spells.theWellOfExistence) > 35000 and heal.lowestInRaid.hp < 0.65' , kps.heal.lowestInRaid },
+    -- "Overcharge Mana" "Surcharge de mana" -- each spell you cast to increase your healing by 3%, stacking. While overcharged, your mana regeneration is halted.
     {spells.overchargeMana, 'heal.countLossInRange(0.80) > 4' },
+    -- "Souvenir des rêves lucides" "Memory of Lucid Dreams" -- augmente la vitesse de génération de la ressource ([Mana][Énergie][Maelström]) de 100% pendant 12 sec
+    {spells.memoryOfLucidDreams, 'heal.lowestInRaid.hp < 0.80' , kps.heal.lowestInRaid },
  
     -- "Holy Word: Serenity"
     {{spells.holyWordSerenity,spells.prayerOfHealing}, 'not player.isMoving and spells.holyWordSerenity.cooldown == 0 and heal.countLossInRange(0.80) > 2 and heal.lowestTankInRaid.hp < 0.55' , kps.heal.lowestTankInRaid , "POH_holyWordSerenity" },
@@ -148,7 +150,7 @@ kps.rotations.register("PRIEST","HOLY",{
     
     {spells.circleOfHealing, 'heal.lowestTankInRaid.hp < 0.95 and heal.lowestUnitInRaid.hp < 0.95' , kps.heal.lowestTankInRaid },
     {spells.circleOfHealing, 'heal.countLossInRange(0.95) > 2' , kps.heal.lowestInRaid },
-    {spells.holyNova, 'kps.holyNova' , "target" },
+    {spells.holyNova, 'kps.holyNova and target.distance <= 10' , "target" },
     {spells.halo, 'not player.isMoving and player.hasTalent(6,3) and heal.countLossInRange(0.85) > 2' , kps.heal.lowestInRaid },
     {spells.halo, 'not player.isMoving and player.hasTalent(6,3) and heal.countLossInRange(0.90) > 4' , kps.heal.lowestInRaid },
     {spells.divineStar, 'player.hasTalent(6,2) and heal.countLossInRange(0.85) > 2 and target.distance <= 30' , "target" },
