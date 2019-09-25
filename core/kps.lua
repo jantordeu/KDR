@@ -9,15 +9,6 @@ local prioritySpell = nil
 local priorityAction = nil
 local priorityMacro = nil
 
-
-kps.runMacro = function(macroText)
-    _RunMacroText(macroText)
-end
-
-kps.stopCasting = function()
-    _SpellStopCasting()
-end
-
 function kps.write(...)
     DEFAULT_CHAT_FRAME:AddMessage("|cffff8000KPS: " .. strjoin(" ", tostringall(...))); -- color orange
 end
@@ -159,4 +150,12 @@ function _SpellStopCasting()
          SpellStopCasting()
       ]])
    end
+end
+
+kps.runMacro = function(macroText)
+    _RunMacroText(macroText)
+end
+
+kps.stopCasting = function()
+    _SpellStopCasting()
 end

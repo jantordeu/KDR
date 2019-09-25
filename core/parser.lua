@@ -133,7 +133,6 @@ local function fnParseMacro(macroText, conditionFn)
                 kps.runMacro(macroText)
             elseif kps["env"].player.isCasting and string.find(macroText,"/stopcasting") ~= nil then
                kps.runMacro("/stopcasting")
-               if kps.debug then print("StopCasting") end
             end
         end
         return nil, nil
