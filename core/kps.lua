@@ -116,11 +116,7 @@ kps.combatStep = function ()
         local spell, target, message = activeRotation.getSpell()
         -- Spell Object
         if spell ~= nil and not player.isCasting then
-            if priorityMacro ~= nil then
-                local macro = priorityMacro
-                priorityMacro = nil
-                kps.runMacro(macro)
-            elseif priorityAction ~= nil then
+            if priorityAction ~= nil then
                 priorityAction()
                 priorityAction = nil
             elseif prioritySpell ~= nil then
@@ -159,10 +155,6 @@ hooksecurefunc("UseAction", function(...)
         end
         if stype == "item" then
             priorityAction = kps.useItem(id)
-        end
-        if stype == "macro" then
-            local macroText = select(3, GetMacroInfo(id))
-            priorityMacro = macroText
         end
     end
 end)
