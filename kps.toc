@@ -1,6 +1,6 @@
-## Interface: 80200
+## Interface: 80205
 ## Title: |cffff8000KDR Addon
-## Notes: KPS darkrotation unlocker
+## Notes: KPS DarkRotation Unlocker
 ## SavedVariables:
 ## Dependencies:
 ## SavedVariablesPerCharacter: KPS_SETTINGS
