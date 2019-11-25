@@ -39,12 +39,6 @@ local castAt = setmetatable({}, {
         local val = function (target,message)
             if target == nil then target = "target" end
 
-            if self.needsSelect then
-                _CastGroundSpellByName(self.name,target)
-            else
-                _CastSpellByName(self.name,target)
-            end
-
             if kps.debug then print(self.name,"|cff1eff00","|",GetUnitName(target),"|cffffffff|",target,"|cffff8000",message) end
             kps.gui.updateSpellTexture(self)
 
@@ -54,6 +48,12 @@ local castAt = setmetatable({}, {
             kps.lastTargetGUID = UnitGUID(target)
             kps.lastTarget = target
             self.lastCast = GetTime()
+            
+            if self.needsSelect then
+                _CastGroundSpellByName(self.name,target)
+            else
+                _CastSpellByName(self.name,target)
+            end
         end
         t[self] = val
         return val
