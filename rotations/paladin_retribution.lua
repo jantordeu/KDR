@@ -63,10 +63,11 @@ kps.rotations.register("PALADIN","RETRIBUTION",
     {spells.blessingOfProtection, 'player.hp < 0.55' , "player"},
 
     -- TRINKETS -- SLOT 0 /use 13
-    {{"macro"}, 'player.useTrinket(0) and player.timeInCombat > 5' , "/use 13" },
+    {{"macro"}, 'player.useTrinket(0) and player.timeInCombat > 5 and player.holyPower >= 3' , "/use 13" },
     -- TRINKETS -- SLOT 1 /use 14
-    {{"macro"}, 'player.useTrinket(1) and player.timeInCombat > 30' , "/use 14" },
-    
+    {{"macro"}, 'player.useTrinket(1) and player.timeInCombat > 5 and player.holyPower >= 3 and target.debuffStacks(spells.razorCoral) == 0' , "/use 14" },
+    {{"macro"}, 'player.useTrinket(1) and player.timeInCombat > 5 and player.holyPower >= 3 and target.debuffStacks(spells.razorCoral) > 5' , "/use 14" },
+
     -- "Shield of Vengeance" -- Creates a barrier of holy light that absorbs (30 / 100 * Total health) damage for 15 sec.
     {spells.shieldOfVengeance, 'player.incomingDamage > player.incomingHeal and target.distanceMax <= 10'},
 
@@ -83,20 +84,20 @@ kps.rotations.register("PALADIN","RETRIBUTION",
         {spells.crusade, 'target.isAttackable and player.hasTalent(7,2) and target.distanceMax <= 10' },
     }},
 
+    {spells.hammerOfWrath, 'player.hasTalent(2,3) and player.holyPower <= 4' , "target" }, -- Generates 1 Holy Power.
+    {spells.executionSentence, 'true' , "target" , "executionSentence" },
     {spells.divineStorm, 'player.plateCount >= 2' , "target" , "divineStorm" },
     {spells.divineStorm, 'kps.multiTarget' , "target" , "divineStorm" },
-    {spells.executionSentence, 'true' , "target" , "executionSentence" },
     {spells.templarsVerdict, 'player.hasBuff(spells.divinePurpose)' , "target" , "templarsVerdict" },
     {spells.templarsVerdict, 'target.hasMyDebuff(spells.judgment)' , "target" , "templarsVerdict" },
     {spells.divineStorm, 'player.hasBuff(spells.empyreanPower)' , "target" , "divineStorm_empyreanPower" },
     {spells.templarsVerdict, 'true' , "target" , "templarsVerdict" },
- 
+
     {spells.bladeOfJustice, 'player.holyPower <= 3 and target.distanceMax <= 10' , "target" },   -- Generates 2 Holy Power. 10 sec cd
     {spells.wakeOfAshes, 'player.holyPower == 0 and target.distanceMax <= 10 and spells.avengingWrath.cooldown > player.gcd' , "target" }, 
     {spells.wakeOfAshes, 'player.holyPower <= 1 and target.distanceMax <= 10 and spells.avengingWrath.cooldown > player.gcd' , "target" },
-    {spells.hammerOfWrath, 'player.hasTalent(2,3)' , "target" }, -- Generates 1 Holy Power.
     {spells.judgment, 'target.distanceMax <= 30' , "target" }, -- 10 sec cd -- Generates 1 Holy Power
-    {spells.consecration, 'player.hasTalent(4,2) and target.distanceMax <= 10' }, -- Generates 1 Holy Power.
+    {spells.consecration, 'player.hasTalent(4,2) and not target.isMoving and target.distanceMax <= 10' }, -- Generates 1 Holy Power.
     {spells.crusaderStrike, 'target.distanceMax <= 10'}, --Generates 1 Holy Power
 
     -- "Empyrean Power" 286393 -- buff -- Your next Divine Storm is free and deals 0 additional damage.
