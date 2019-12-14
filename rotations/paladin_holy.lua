@@ -57,14 +57,14 @@ kps.rotations.register("PALADIN","HOLY",
         {spells.cleanse, 'heal.isMagicDispellable' , kps.heal.isMagicDispellable },
     }},
     -- Interrupt
+    {spells.hammerOfJustice, 'kps.tankhammer and mouseover.distance <= 10 and mouseover.isAttackable and mouseover.distanceMax <= 10 and mouseover.isMoving' , "mouseover" },
+    {spells.hammerOfJustice, 'kps.tankhammer and target.distance <= 10 and target.isAttackable and target.distanceMax <= 10 and target.isMoving' , "target" },
     {{"nested"}, 'kps.interrupt' ,{
         {spells.hammerOfJustice, 'focus.distance <= 10 and focus.isCasting and focus.isAttackable' , "focus" },
         {spells.hammerOfJustice, 'target.distance <= 10 and target.isCasting and target.isAttackable' , "target" },
         {spells.hammerOfJustice, 'focustarget.distance <= 10 and focustarget.isCasting and focustarget.isAttackable' , "focustarget" },
         -- "Repentir" "Repentance" -- Forces an enemy target to meditate, incapacitating them for 1 min.
         {spells.repentance, 'player.hasTalent(3,2) and target.isCasting and target.isAttackable' , "target" },
-        {spells.hammerOfJustice, 'mouseover.distance <= 10 and mouseover.isAttackable and mouseover.distanceMax <= 10 and mouseover.isMoving' , "mouseover" },
-        {spells.hammerOfJustice, 'target.distance <= 10 and target.isAttackable and target.distanceMax <= 10 and target.isMoving' , "target" },
     }},
 
     -- APPLY MANUAL -- 
@@ -87,9 +87,11 @@ kps.rotations.register("PALADIN","HOLY",
     {spells.ruleOfLaw, 'spells.ruleOfLaw.charges == 2 and not player.hasBuff(spells.ruleOfLaw) and heal.lowestInRaid.hpIncoming < 0.85' },
     -- "Lumière de l’aube" -- "Light of Dawn" -- healing up to 5 injured allies within a 15 yd frontal cone
     {spells.lightOfDawn, 'not player.isMoving and heal.countLossInRange(0.82) > 2 and target.distance <= 30' },
-    {spells.lightOfDawn, 'not player.isMoving and heal.countLossInRange(0.92) > 4 and target.distance <= 30' },
-    {spells.lightOfDawn, 'not player.isMoving and heal.countLossInRange(0.86) > 3 and target.distance <= 30' },
     {spells.lightOfDawn, 'not player.isMoving and heal.countLossInRange(0.82) > 2 and heal.countInRange <= 5' },
+    {spells.lightOfDawn, 'not player.isMoving and heal.countLossInRange(0.85) > 3 and target.distance <= 30' },
+    {spells.lightOfDawn, 'not player.isMoving and heal.countLossInDistance(0.85,10) > 2' },
+    {spells.lightOfDawn, 'player.isMoving and heal.countLossInDistance(0.90,10) > 2' },
+    
     -- PVP
     {spells.divineFavor, 'player.isPVP' },
 
@@ -126,6 +128,7 @@ kps.rotations.register("PALADIN","HOLY",
         {spells.consecration, 'not player.isMoving and target.isAttackable and target.distance <= 10' },
     }},
 
+    {{"nested"},'kps.cooldowns', {
     -- "Vengeur sacré" --"Holy Avenger" -- Increases your haste by 30% and your Holy Shock healing by 30% for 20 sec.
     {spells.holyAvenger, 'player.hasTalent(5,3) and heal.lowestInRaid.hp < 0.40 and heal.countInRange <= 5' },
     {spells.holyAvenger, 'player.hasTalent(5,3) and heal.countLossInRange(0.80) > 3' },
@@ -138,6 +141,9 @@ kps.rotations.register("PALADIN","HOLY",
     {spells.avengingCrusader, 'player.hasTalent(6,2) and heal.lowestTankInRaid.hp < 0.40 and heal.countInRange <= 5' },
     {spells.avengingCrusader, 'player.hasTalent(6,2) and heal.countLossInRange(0.80) > 3' },
     {spells.avengingCrusader, 'player.hasTalent(6,2) and heal.countLossInRange(0.80) > 2 and heal.countInRange <= 5' },
+    }},
+    -- "Vengeur sacré" --"Holy Avenger" -- Increases your haste by 30% and your Holy Shock healing by 30% for 20 sec.
+    {spells.holyAvenger, 'player.hasTalent(5,3) and heal.countLossInRange(0.80)*2  > heal.countInRange' },
 
 
     -- "Imprégnation de lumière" "Infusion of Light" -- Reduces the cast time of your next Holy Light by 1.5 sec or increases the healing of your next Flash of Light by 40%.

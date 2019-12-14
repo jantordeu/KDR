@@ -63,9 +63,9 @@ kps.rotations.register("MAGE","FIRE",
     }},
 
     -- TRINKETS -- SLOT 0 /use 13
-    {{"macro"}, 'player.useTrinket(0) and player.timeInCombat > 9 and target.isAttackable' , "/use 13" },
+    {{"macro"}, 'player.useTrinket(0) and player.timeInCombat > 5 and target.isAttackable' , "/use 13" },
     -- TRINKETS -- SLOT 1 /use 14    
-    {{"macro"}, 'player.useTrinket(1) and player.timeInCombat > 9 and target.isAttackable' , "/use 14" },
+    {{"macro"}, 'player.useTrinket(1) and player.timeInCombat > 5 and target.isAttackable' , "/use 14" },
     
     -- Bonne série -- Hot Streak -- Your next Pyroblast or Flamestrike spell is instant cast, and causes double the normal Ignite damage.
     -- Réchauffement -- Heating Up -- Vous avez réussi un sort critique. Si le suivant est également critique, l’incantation de votre prochain sort Explosion pyrotechnique ou Choc de flammes sera instantanée et il infligera le double de dégâts avec Enflammer.
@@ -87,8 +87,8 @@ kps.rotations.register("MAGE","FIRE",
         {{"macro"}, 'player.plateCount >= 3 and spells.flamestrike.cooldown == 0 and player.hasBuff(spells.hotStreak) and target.isAttackable and target.distanceMax <= 5' , "/cast [@player] "..Flamestrike },
         {{"macro"}, 'player.plateCount >= 3 and spells.flamestrike.cooldown == 0 and player.hasBuff(spells.hotStreak) and mouseover.isAttackable' , "/cast [@cursor] "..Flamestrike },
         {spells.fireBlast, 'player.hasBuff(spells.heatingUp)', "target" },
-        {spells.scorch, 'target.isAttackable and player.plateCount >= 3' , "target" },
-        {spells.scorch, 'focus.isAttackable and player.plateCount >= 3' , "focus" },
+        {spells.scorch, 'target.isAttackable and target.distanceMax <= 10 and player.plateCount >= 3' , "target" },
+        {spells.scorch, 'focus.isAttackable and target.distanceMax <= 10 and player.plateCount >= 3' , "focus" },
     }},
 
 	{{"nested"}, 'player.hasBuff(spells.combustion) and target.isAttackable', {

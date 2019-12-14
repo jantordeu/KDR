@@ -34,13 +34,13 @@ kps.rotations.register("PALADIN","RETRIBUTION",
     {spells.layOnHands, 'heal.lowestTankInRaid.hp < 0.30', kps.heal.lowestTankInRaid },
     {spells.flashOfLight, 'player.hasTalent(6,1) and player.hp < 0.80 and player.buffStacks(spells.selflessHealer) >= 3', "player" },
     {spells.wordOfGlory , 'player.hasTalent(6,3) and player.hp < 0.65'}, 
-      
-    -- Interrupt
-    {spells.hammerOfJustice, 'kps.tankhammer and mouseover.distance <= 10 and mouseover.isAttackable and mouseover.distanceMax <= 10 and mouseover.isMoving' , "mouseover" },
-    {spells.hammerOfJustice, 'kps.tankhammer and target.distance <= 10 and target.isAttackable and target.distanceMax <= 10 and target.isMoving' , "target" },
+
     -- "Main d’entrave" -- Movement speed reduced by 70%. 10 seconds remaining
     {spells.handOfHindrance, 'kps.tankhammer and mouseover.distance <= 10 and mouseover.isAttackable and mouseover.distanceMax <= 10 and mouseover.isMoving' , "mouseover" },
     {spells.handOfHindrance, 'kps.tankhammer and target.distance <= 10 and target.isAttackable and target.distanceMax <= 10 and target.isMoving' , "target" },
+    -- Interrupt
+    {spells.hammerOfJustice, 'kps.tankhammer and mouseover.distance <= 10 and mouseover.isAttackable and mouseover.distanceMax <= 10 and mouseover.isMoving' , "mouseover" },
+    {spells.hammerOfJustice, 'kps.tankhammer and target.distance <= 10 and target.isAttackable and target.distanceMax <= 10 and target.isMoving' , "target" },
     {{"nested"}, 'kps.interrupt',{
         {spells.hammerOfJustice, 'focus.distanceMax <= 10 and focus.isCasting' , "focus" },
         {spells.hammerOfJustice, 'target.distanceMax <= 10 and target.isCasting ' , "target" },
@@ -73,9 +73,8 @@ kps.rotations.register("PALADIN","RETRIBUTION",
     {spells.azerite.memoryOfLucidDreams, 'target.isAttackable and player.hasBuff(spells.avengingWrath) and player.myBuffDuration(spells.avengingWrath) < 17' , "target" },
     {spells.azerite.theUnboundForce, 'target.isAttackable and target.distanceMax <= 30' , "target" },
    
-    {spells.inquisition, 'player.hasTalent(7,3) and spells.avengingWrath.cooldown < player.gcd and player.myBuffDuration(spells.inquisition) < 12 and player.holyPower >= 2 ' , "target" , "inquisition" },
-    {spells.inquisition, 'player.hasTalent(7,3) and spells.avengingWrath.cooldown < 15 and player.myBuffDuration(spells.inquisition) < 12 and player.holyPower >= 3 ' , "target" , "inquisition" },
-    {{"nested"},'kps.cooldowns', {
+    {spells.inquisition, 'player.hasTalent(7,3) and player.myBuffDuration(spells.inquisition) < 12 and player.holyPower >= 3 ' , "target" , "inquisition" },
+    {{"nested"},'kps.cooldowns and player.holyPower >= 2', {
         {spells.avengingWrath, 'target.isAttackable and player.hasTalent(7,3) and player.myBuffDuration(spells.inquisition) > 25 and target.distanceMax <= 10' },
         {spells.avengingWrath, 'target.isAttackable and player.hasTalent(7,1) and target.distanceMax <= 10' },
         {spells.crusade, 'target.isAttackable and player.hasTalent(7,2) and target.distanceMax <= 10' },
