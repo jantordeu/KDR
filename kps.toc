@@ -1,4 +1,4 @@
-## Interface: 80205
+## Interface: 80300
 ## Title: |cffff8000KDR Addon
 ## Notes: KPS DarkRotation Unlocker
 ## SavedVariables:
