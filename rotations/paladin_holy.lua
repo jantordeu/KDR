@@ -178,12 +178,12 @@ kps.rotations.register("PALADIN","HOLY",
     -- GLIMMER HEAL
     -- 216411/divine-purpose -- spells.divinePurposeHolyShock -- Divine Purpose Your next Holy Shock costs no mana. 10 seconds remaining
     -- 216413/divine-purpose -- spells.divinePurposeLightOfDawn -- Divine Purpose Your next Light of Dawn costs no mana. 10 seconds remaining
-    {spells.holyShock, 'heal.lowestInRaid.hp < 0.85 and heal.lowestInRaid.hp < heal.lowestTankInRaid.hp and heal.lowestInRaid.hp < player.hp' , kps.heal.lowestInRaid },
-    {spells.holyShock, 'player.hp < 0.85 and player.hp < heal.lowestTankInRaid.hp' , "player"  },
-    {spells.holyShock, 'heal.lowestTankInRaid.hp < 0.85' , kps.heal.lowestTankInRaid },
     {spells.holyShock, 'not heal.lowestInRaid.hasBuff(spells.glimmerOfLight)' , kps.heal.lowestInRaid , "holyShock_lowest" },
     {spells.holyShock, 'not heal.lowestUnitInRaid.hasBuff(spells.glimmerOfLight)' , kps.heal.lowestUnitInRaid , "holyShock_lowestUnit" },
     {spells.holyShock, 'not heal.hasNotBuffGlimmer.isUnit("player")' , kps.heal.hasNotBuffGlimmer , "holyShock_GLIMMER" },
+    {spells.holyShock, 'heal.lowestInRaid.hp < 0.85 and heal.lowestInRaid.hp < heal.lowestTankInRaid.hp and heal.lowestInRaid.hp < player.hp' , kps.heal.lowestInRaid },
+    {spells.holyShock, 'player.hp < 0.85 and player.hp < heal.lowestTankInRaid.hp' , "player"  },
+    {spells.holyShock, 'heal.lowestTankInRaid.hp < 0.85' , kps.heal.lowestTankInRaid },
 
     {{"nested"},'kps.cooldowns', {
         -- "Vengeur sacré" --"Holy Avenger" -- Increases your haste by 30% and your Holy Shock healing by 30% for 20 sec.

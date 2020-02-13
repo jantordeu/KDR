@@ -46,7 +46,7 @@ function Unit.isCastingClipping(self)
 end
 
 function Unit.isCasting(self)
-    if Unit.isCastingClipping(self) then return false end
+    --if Unit.isCastingClipping(self) then return false end
     if Unit.castTimeLeft(self) > kps.latency or Unit.channelTimeLeft(self) > kps.latency then return true end
     return false
 end
