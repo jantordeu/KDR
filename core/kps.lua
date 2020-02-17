@@ -139,6 +139,10 @@ kps.combatStep = function ()
                 spell.cast(target,message)
             end
         end
+        -- Castable Spell while casting
+        if spell ~= nil and player.isCasting and spell.isCastableSpell then
+            spell.cast(target,message)
+        end
     end
 end
 

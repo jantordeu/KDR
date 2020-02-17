@@ -64,10 +64,9 @@ kps.rotations.register("PALADIN","RETRIBUTION",
     {{"macro"}, 'player.useItem(5512) and player.hp <= 0.72' ,"/use item:5512" },
 
     -- TRINKETS -- SLOT 0 /use 13
-    {{"macro"}, 'player.useTrinket(0) and player.timeInCombat > 20' , "/use 13" },
+    --{{"macro"}, 'player.useTrinket(0) and player.timeInCombat > 20' , "/use 13" },
     -- TRINKETS -- SLOT 1 /use 14
     {{"macro"}, 'player.useTrinket(1) and target.debuffStacks(spells.razorCoral) == 0' , "/use 14" },
-    --{{"macro"}, 'player.useTrinket(1) and target.debuffStacks(spells.razorCoral) >= 3' , "/use 14" },
     {{"macro"}, 'player.useTrinket(1) and player.buffDuration(spells.avengingWrath) > 20 and kps.timeInCombat > 30' , "/use 14" },
     {{"macro"}, 'player.useTrinket(1) and player.buffDuration(spells.crusade) > 20 and kps.timeInCombat > 30' , "/use 14" },
 
@@ -101,7 +100,7 @@ kps.rotations.register("PALADIN","RETRIBUTION",
     {spells.wakeOfAshes, 'player.holyPower <= 1 and spells.avengingWrath.cooldown > 30 and target.distanceMax <= 10' , "target" },
 
     {spells.judgment, 'target.distanceMax <= 30' , "target" }, -- 10 sec cd -- Generates 1 Holy Power
-    {spells.consecration, 'player.hasTalent(4,2) and not target.isMoving and target.distanceMax <= 10' }, -- Generates 1 Holy Power.
+    {spells.consecration, 'player.hasTalent(4,2) and not player.isMoving and not target.isMoving and target.distanceMax <= 10' }, -- Generates 1 Holy Power.
     {spells.crusaderStrike, 'target.distanceMax <= 10'}, --Generates 1 Holy Power
 
     -- "Empyrean Power" 286393 -- buff -- Your next Divine Storm is free and deals 0 additional damage.

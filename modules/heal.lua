@@ -485,7 +485,7 @@ end)
 local unitBuffCount = function(spell)
     local count = 0
     for name, unit in pairs(raidStatus) do
-        if unit.isHealable and unit.hasBuff(spell) then
+        if unit.isHealable and unit.hasMyBuff(spell) then
             count = count + 1
         end
     end
@@ -504,7 +504,7 @@ end)
 local unitNotBuffCount = function(spell)
     local count = 0
     for name, unit in pairs(raidStatus) do
-        if unit.isHealable and not unit.hasBuff(spell) then
+        if unit.isHealable and not unit.hasMyBuff(spell) then
             count = count + 1
         end
     end
@@ -659,8 +659,11 @@ print("|cffff8000countInRange:|cffffffff",kps["env"].heal.countInRange)
 print("|cffff8000CountLoss_90:|cffffffff", kps["env"].heal.countLossInRange(0.90),"|cffff8000CountLossDistance_90:|cffffffff", kps["env"].heal.countLossInDistance(0.90,10))
 print("|cffff8000plateCount:|cffffffff", kps["env"].player.plateCount)
 
+--print("|cffff8000debuffStacks:|cffffffff", kps["env"].target.debuffStacks(kps.spells.paladin.razorCoral))
+--print("|cffff8000debuffCount:|cffffffff", kps["env"].target.debuffCount(kps.spells.paladin.razorCoral))
+
 --print("|cff1eff00GlimmerLowest|cffffffff", kps["env"].heal.hasBuffGlimmer.name,"|",kps["env"].heal.hasBuffGlimmer.hp)
---print("|cffff8000BuffglimmerCount:|cffffffff", kps["env"].heal.hasBuffCount(kps.spells.paladin.glimmerOfLight))
+print("|cffff8000BuffglimmerCount:|cffffffff", kps["env"].heal.hasBuffCount(kps.spells.paladin.glimmerOfLight))
 
 
 --print("|cffff8000countCharge:|cffffffff", kps.spells.priest.mindBlast.charges)
@@ -690,7 +693,7 @@ print("|cffff8000plateCount:|cffffffff", kps["env"].player.plateCount)
 --print("|cffff8000cooldownSpellCharge:|cffffffff", kps.spells.priest.powerWordRadiance.cooldown)
 
 --print("|cffff8000buffValue:|cffffffff", kps["env"].player.buffValue(kps.spells.warrior.ignorePain))
---print("|cffff8000buffValue:|cffffffff", kps["env"].player.buffValue(kps.spells.priest.theWellOfExistence))
+--print("|cffff8000buffValue:|cffffffff", kps["env"].player.buffValue(kps.spells.azerite.theWellOfExistence))
 --print("|cffff8000buffValue:|cffffffff", kps["env"].player.buffValue(kps.spells.priest.masteryEchoOfLight))
 
 --local debuff = kps.spells.mage.conflagration
