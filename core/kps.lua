@@ -114,6 +114,10 @@ kps.combatStep = function ()
         if not activeRotation then return end
         activeRotation.checkTalents()
         local spell, target, message = activeRotation.getSpell()
+        -- Castable Spell while casting
+        if spell ~= nil and player.isCasting and spell.isCastableSpell then
+            spell.cast(target,message)
+        end
         -- Spell Object
         if spell ~= nil and not player.isCasting then
             if priorityAction ~= nil then
@@ -138,10 +142,6 @@ kps.combatStep = function ()
                 LOG.debug("Casting %s for next cast.", spell.name)
                 spell.cast(target,message)
             end
-        end
-        -- Castable Spell while casting
-        if spell ~= nil and player.isCasting and spell.isCastableSpell then
-            spell.cast(target,message)
         end
     end
 end
