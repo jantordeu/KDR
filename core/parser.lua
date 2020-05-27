@@ -129,12 +129,7 @@ end
 local function fnParseMacro(macroText, conditionFn)
     return function ()
         if conditionFn() then
-            if not kps["env"].player.isCasting then
-                kps.runMacro(macroText)
-            elseif kps["env"].player.isCasting and string.find(macroText,"/stopcasting") ~= nil then
-               kps.runMacro("/stopcasting")
-               print("/stopcasting")
-            end
+            return macroText, "-"
         end
         return nil, nil
     end
