@@ -2,8 +2,6 @@
 AutoTurn Module
 ]]--
 
-
--- another example
 function _JumpOrAscendStart()
    secured = false
    while not secured do
