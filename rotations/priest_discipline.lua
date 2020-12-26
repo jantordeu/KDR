@@ -109,6 +109,7 @@ kps.rotations.register("PRIEST","DISCIPLINE",{
     {spells.shadowWordDeath, 'mouseover.isAttackable and mouseover.hp < 0.20 and player.hp > 0.50' , "mouseover" },
     {spells.shadowWordDeath, 'target.isAttackable and target.hp < 0.20 and player.hp > 0.50' , "target" },
     {{"nested"},'kps.multiTarget', {
+        {spells.shadowMend, 'not player.isMoving and player.hp < 0.65 and not player.isInGroup' , "player" , "shadowMend_player"  },
         {spells.shadowMend, 'not player.isMoving and targettarget.isFriend and not targettarget.hasMyBuff(spells.atonement) and not spells.shadowMend.isRecastAt("targettarget")' , "targettarget" , "shadowMend_targettarget" },
         {spells.powerWordShield, 'targettarget.isFriend and not targettarget.hasMyBuff(spells.atonement) and not spells.shadowMend.isRecastAt("targettarget") and not targettarget.hasDebuff(spells.weakenedSoul)' , "targettarget" , "shield_targettarget" },
         {spells.powerInfusion, 'target.hp > 0.50' , env.damageTarget },
