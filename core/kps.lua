@@ -97,6 +97,15 @@ kps.combatStep = function ()
     -- No combat if mounted (except if overriden by config), dead or drinking
     if (player.isMounted and not kps.config.dismountInCombat) or player.isDead or player.isDrinking then return end
 
+    local activeRotation = kps.rotations.getActive()
+	if not activeRotation then return end
+	activeRotation.checkTalents()
+	local spell, target, message = activeRotation.getSpell()
+	-- Castable Spell while casting
+	if spell ~= nil and spell.isCastableSpell and player.isCasting then
+		spell.cast(target,message)
+	end
+
     if castSequence ~= nil then
         if castSequence[castSequenceIndex] ~= nil and (castSequenceStartTime + kps.maxCastSequenceLength > GetTime()) then
             local spell = castSequence[castSequenceIndex]()
@@ -110,31 +119,23 @@ kps.combatStep = function ()
             castSequence = nil
         end
     else
-        local activeRotation = kps.rotations.getActive()
-        if not activeRotation then return end
-        activeRotation.checkTalents()
-        local spell, target, message = activeRotation.getSpell()
-        -- Castable Spell while casting
-        if spell ~= nil and spell.isCastableSpell and player.isCasting then
-            spell.cast(target,message)
-        end
         -- Spell Object
-        if spell ~= nil and spell.name ~= nil then
+        if spell ~= nil and spell.name ~= nil and not player.isCasting then
             if priorityAction ~= nil then
                 priorityAction()
                 priorityAction = nil
             elseif prioritySpell ~= nil then
                 if prioritySpell.canBeCastAt("target") then
                     prioritySpell.cast(target)
-                    if prioritySpell.cooldownTotal < 3 and not prioritySpell.needsSelect then prioritySpell = nil end
-                    --LOG.warn("Priority Spell %s was casted.", prioritySpell)
+                    LOG.warn("Priority Spell %s was casted.", prioritySpell)
+                    prioritySpell = nil
                 else
                     if prioritySpell.cooldown > 3 then prioritySpell = nil end
-                    if not player.isCasting then spell.cast(target,message) end
+                    spell.cast(target,message)
                 end
             else
-                LOG.debug("Casting %s for next cast.", spell.name)
-                if not player.isCasting then spell.cast(target,message) end
+                LOG.debug("Casting %s[id=%s] for next cast.", spell.name)
+                spell.cast(target,message)
             end
         end
         -- Cast Sequence Table
