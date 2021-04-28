@@ -84,9 +84,6 @@ kps.stopCasting = function()
     _SpellStopCasting()
 end
 
-local combatStarted = -1
-kps.timeInCombat = 0
-
 kps.combatStep = function ()
     -- Check for combat
     if not InCombatLockdown() and not kps.autoAttackEnabled then
