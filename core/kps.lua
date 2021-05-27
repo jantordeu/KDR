@@ -134,7 +134,7 @@ kps.combatStep = function ()
     else
         if prioritySpell ~= nil and GetTime() - prioritySpellTime < 5 then
             if prioritySpell.canBeCastAt(prioritySpellTarget) then
-                prioritySpell.cast(target)
+                prioritySpell.cast(prioritySpellTarget)
                 prioritySpell = nil
             else
                 if prioritySpell.cooldown > 5 then prioritySpell = nil end

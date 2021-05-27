@@ -6,7 +6,7 @@
 ## SavedVariablesPerCharacter: KPS_SETTINGS
 
 libs\LibStub-1.0\LibStub.lua
-libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
 libs\LibRangeCheck-2.0\LibRangeCheck-2.0.lua
 init.lua
 core\logger.lua
