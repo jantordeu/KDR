@@ -29,7 +29,6 @@ kps.prioritySpell = function (spell, target)
     prioritySpellTarget = target or "target"
     prioritySpellTime = GetTime()
     LOG.debug("Set %s for next cast.",spell.name)
-    LOG.warn("Set for next cast:  %s. %s", spell.name, prioritySpellTarget)
 end
 
 function _CastSpellByName(spell,target)
