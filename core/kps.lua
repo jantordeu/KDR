@@ -187,3 +187,4 @@ end)
 kps.lastCastedSpell = nil
 kps.lastSentSpell = nil
 kps.lastStartedSpell = nil
+kps.lastInterruptSpell = nil

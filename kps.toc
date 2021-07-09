@@ -1,6 +1,6 @@
-## Interface: 90005
-## Title: |cffff8000KDR Addon
-## Notes: KPS DarkRotation Unlocker
+## Interface: 90100
+## Title: |cffff8000KPS Addon
+## Notes: Karnofsky Performance System
 ## SavedVariables:
 ## Dependencies:
 ## SavedVariablesPerCharacter: KPS_SETTINGS
