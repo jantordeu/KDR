@@ -31,6 +31,38 @@ kps.prioritySpell = function (spell, target)
     LOG.debug("Set %s for next cast.", spell.name)
 end
 
+function _CastSpellByName(spell,target)
+   target = target or "target"
+   secured = false
+   while not secured do
+      RunScript([[
+         for index = 1, 100 do
+            if not issecure() then
+               return
+            end
+         end
+         secured = true
+         CastSpellByName("]] .. spell .. [[", "]] .. target .. [[")
+      ]])
+   end
+end
+
+function _CastGroundSpellByName(spell, target)
+  local target = target or "target"
+  secured = false
+  while not secured do
+    RunScript([[
+      for index = 1, 500 do
+        if not issecure() then
+          return
+        end
+      end
+      RunMacroText("/cast [@cursor] ]] .. spell .. [[")
+      secured = true
+    ]])
+  end
+end
+
 function _RunMacroText(macroText)
     macroText = macroText or ""
     secured = false
